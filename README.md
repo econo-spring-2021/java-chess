@@ -2,10 +2,11 @@
 체스 미션을 진행하는 저장소
 
 # 1 step features
-* [ ] Initialize chess game
+* [x] Initialize chess game
   * [x] Initialize chessboard
-  * [ ] Initialize unit
-  * [ ] Locate initial unit to initial position
+  * [x] Initialize unit
+  * [x] Locate initial unit to initial position
 * [ ] Feature console
   * [ ] Print announcement
   * [ ] Execution the command according to input
+* [ ] Refactor chess unit type implementation
