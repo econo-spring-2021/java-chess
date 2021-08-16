@@ -9,4 +9,3 @@
 * [x] Feature console
   * [x] Print announcement
   * [x] Execution the command according to input
-* [ ] Refactor chess unit type implementation
