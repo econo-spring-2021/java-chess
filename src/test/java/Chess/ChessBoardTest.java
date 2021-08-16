@@ -27,10 +27,27 @@ public class ChessBoardTest {
     }
 
     @Test
+    @DisplayName("올바르게 체스말을 조회하는지")
+    void test_getUnitFromCell() {
+        chessBoard.initializeChessUnit();
+
+        ChessUnit testUnit = new ChessUnit(ChessUnitType.KING, true);
+        chessBoard.setUnitFromCell(0, 0, testUnit);
+        Assertions.assertEquals(testUnit, chessBoard.getUnitFromCell(0, 0));
+    }
+
+    @Test
     @DisplayName("잘못된 위치의 체스말을 조회할 때, 올바른 예외를 발생시키는지")
     void test_getUnitFromCell_IndexOutOfBoundsException() {
         Assertions.assertThrows(IndexOutOfBoundsException.class,
                 () -> chessBoard.getUnitFromCell(ChessBoard.CHESSBOARD_ROW + 1, ChessBoard.CHESSBOARD_COLUMN + 1));
+    }
+
+    @Test
+    @DisplayName("잘못된 위치에 체스말을 위치시킬 때, 올바른 예외를 발생시키는지")
+    void test_setUnitFromCell_IndexOutOfBoundsException() {
+        Assertions.assertThrows(IndexOutOfBoundsException.class,
+                () -> chessBoard.setUnitFromCell(ChessBoard.CHESSBOARD_ROW + 1, ChessBoard.CHESSBOARD_COLUMN + 1, new ChessUnit()));
     }
 
     @Test

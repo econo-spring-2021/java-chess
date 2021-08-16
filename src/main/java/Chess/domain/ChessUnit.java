@@ -4,6 +4,11 @@ public class ChessUnit {
     ChessUnitType type;
     boolean isBlack;
 
+    public ChessUnit() {
+        this.type = ChessUnitType.EMPTY;
+        this.isBlack = true;
+    }
+
     public ChessUnit(ChessUnitType type, boolean isBlack) {
         this.type = type;
         this.isBlack = isBlack;

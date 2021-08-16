@@ -8,6 +8,10 @@ public class InputView {
 
     private static Scanner scanner = new Scanner(System.in);
 
+    public static void setTestScanner(Scanner testScanner) {
+        scanner = testScanner;
+    }
+
     public static String getGameOperationCommand() {
         try {
             String command = scanner.nextLine();
