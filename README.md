@@ -3,7 +3,7 @@
 
 # 1 step features
 * [ ] Initialize chess game
-  * [ ] Initialize chessboard
+  * [x] Initialize chessboard
   * [ ] Initialize unit
   * [ ] Locate initial unit to initial position
 * [ ] Feature console
