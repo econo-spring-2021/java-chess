@@ -6,7 +6,7 @@
   * [x] Initialize chessboard
   * [x] Initialize unit
   * [x] Locate initial unit to initial position
-* [ ] Feature console
-  * [ ] Print announcement
-  * [ ] Execution the command according to input
+* [x] Feature console
+  * [x] Print announcement
+  * [x] Execution the command according to input
 * [ ] Refactor chess unit type implementation

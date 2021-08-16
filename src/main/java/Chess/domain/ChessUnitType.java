@@ -16,4 +16,12 @@ public enum ChessUnitType {
         this.black = black;
         this.white = white;
     }
+
+    public Character getBlackSymbol() {
+        return black;
+    }
+
+    public Character getWhiteSymbol() {
+        return white;
+    }
 }

@@ -31,7 +31,7 @@ public class ChessBoard {
         for (int i = 0; i < CHESSBOARD_ROW; i++) {
             List<ChessUnit> boardRow = new ArrayList<>();
             for (int j = 0; j < CHESSBOARD_COLUMN; j++) {
-                boardRow.add(new ChessUnit(ChessUnitType.EMPTY));
+                boardRow.add(new ChessUnit(ChessUnitType.EMPTY, true));
             }
             chessBoard.add(boardRow);
         }
@@ -39,10 +39,10 @@ public class ChessBoard {
 
     public void initializeChessUnit() {
         for (int i = 0; i < CHESSBOARD_COLUMN; i++) {
-            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i]));
-            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new ChessUnit(ChessUnitType.PAWN));
-            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i]));
-            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new ChessUnit(ChessUnitType.PAWN));
+            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], true));
+            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, true));
+            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], false));
+            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, false));
         }
     }
 
@@ -52,5 +52,17 @@ public class ChessBoard {
 
     public void setUnitFromCell(int r, int c, ChessUnit unit) throws IndexOutOfBoundsException {
         chessBoard.get(r).set(c, unit);
+    }
+
+    public String convertChessBoardToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (List<ChessUnit> row : chessBoard) {
+            for (ChessUnit unit : row) {
+                stringBuilder.append(unit.getTypeSymbol());
+            }
+            stringBuilder.append('\n');
+        }
+
+        return stringBuilder.toString();
     }
 }

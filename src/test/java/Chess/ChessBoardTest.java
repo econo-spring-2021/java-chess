@@ -1,6 +1,7 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
+import Chess.domain.ChessUnit;
 import Chess.domain.ChessUnitType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +35,7 @@ public class ChessBoardTest {
 
     @Test
     @DisplayName("체스판에 시작 체스말을 제대로 생성되었는지")
-    void test_initializeChessUnitOnChessBoard() {
+    void test_initializeChessUnit() {
         chessBoard.initializeChessUnit();
 
         for (int i = 0; i < ChessBoard.CHESSBOARD_COLUMN; i++) {
@@ -43,5 +44,17 @@ public class ChessBoardTest {
             Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], chessBoard.getUnitFromCell(ChessBoard.WHITE_SPECIAL_CHESS_UNIT_ROW, i).getType());
             Assertions.assertEquals(ChessUnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.WHITE_PAWN_CHESS_INIT_ROW, i).getType());
         }
+    }
+
+    @Test
+    @DisplayName("체스판을 제대로 문자열로 변환하는지")
+    void test_convertChessBoardToString() {
+        chessBoard.setUnitFromCell(0, 0, new ChessUnit(ChessUnitType.KING, true));
+        chessBoard.setUnitFromCell(0, 1, new ChessUnit(ChessUnitType.KING, false));
+        chessBoard.setUnitFromCell(1, 0, new ChessUnit(ChessUnitType.QUEEN, true));
+        chessBoard.setUnitFromCell(1, 1, new ChessUnit(ChessUnitType.QUEEN, false));
+
+        String expectedChessBoard = "Kk......\nQq......\n........\n........\n........\n........\n........\n........\n";
+        Assertions.assertEquals(expectedChessBoard, chessBoard.convertChessBoardToString());
     }
 }
