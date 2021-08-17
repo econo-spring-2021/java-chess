@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
-public class InputTest {
+public class InputViewTest {
 
     private Scanner generateScanner(String string) {
         return new Scanner(string);

@@ -9,28 +9,27 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class ChessBoardTest {
-    ChessBoard chessBoard;
+    ChessBoard chessBoard = ChessBoard.getInstance();
 
     @BeforeEach
     void initializeChessBoard() {
-        chessBoard = new ChessBoard();
+        chessBoard.initializeChessGame();
     }
 
     @Test
-    @DisplayName("체스판이 제대로 생성되었는지")
-    void test_initializeChessBoard() {
-        for (int i = 0; i < ChessBoard.CHESSBOARD_ROW; i++) {
-            for (int j = 0; j < ChessBoard.CHESSBOARD_COLUMN; j++) {
-                Assertions.assertEquals(ChessUnitType.EMPTY, chessBoard.getUnitFromCell(i, j).getType());
-            }
+    @DisplayName("게임을 위한 체스판이 제대로 초기화되었는지")
+    void test_initializeChessUnit() {
+        for (int i = 0; i < ChessBoard.CHESSBOARD_COLUMN; i++) {
+            Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], chessBoard.getUnitFromCell(ChessBoard.BLACK_SPECIAL_CHESS_UNIT_ROW, i).getType());
+            Assertions.assertEquals(ChessUnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.BLACK_PAWN_CHESS_UNIT_ROW, i).getType());
+            Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], chessBoard.getUnitFromCell(ChessBoard.WHITE_SPECIAL_CHESS_UNIT_ROW, i).getType());
+            Assertions.assertEquals(ChessUnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.WHITE_PAWN_CHESS_INIT_ROW, i).getType());
         }
     }
 
     @Test
     @DisplayName("올바르게 체스말을 조회하는지")
     void test_getUnitFromCell() {
-        chessBoard.initializeChessUnit();
-
         ChessUnit testUnit = new ChessUnit(ChessUnitType.KING, true);
         chessBoard.setUnitFromCell(0, 0, testUnit);
         Assertions.assertEquals(testUnit, chessBoard.getUnitFromCell(0, 0));
@@ -51,19 +50,6 @@ public class ChessBoardTest {
     }
 
     @Test
-    @DisplayName("체스판에 시작 체스말을 제대로 생성되었는지")
-    void test_initializeChessUnit() {
-        chessBoard.initializeChessUnit();
-
-        for (int i = 0; i < ChessBoard.CHESSBOARD_COLUMN; i++) {
-            Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], chessBoard.getUnitFromCell(ChessBoard.BLACK_SPECIAL_CHESS_UNIT_ROW, i).getType());
-            Assertions.assertEquals(ChessUnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.BLACK_PAWN_CHESS_UNIT_ROW, i).getType());
-            Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], chessBoard.getUnitFromCell(ChessBoard.WHITE_SPECIAL_CHESS_UNIT_ROW, i).getType());
-            Assertions.assertEquals(ChessUnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.WHITE_PAWN_CHESS_INIT_ROW, i).getType());
-        }
-    }
-
-    @Test
     @DisplayName("체스판을 제대로 문자열로 변환하는지")
     void test_convertChessBoardToString() {
         chessBoard.setUnitFromCell(0, 0, new ChessUnit(ChessUnitType.KING, true));
@@ -71,7 +57,7 @@ public class ChessBoardTest {
         chessBoard.setUnitFromCell(1, 0, new ChessUnit(ChessUnitType.QUEEN, true));
         chessBoard.setUnitFromCell(1, 1, new ChessUnit(ChessUnitType.QUEEN, false));
 
-        String expectedChessBoard = "Kk......\nQq......\n........\n........\n........\n........\n........\n........\n";
+        String expectedChessBoard = "KkBQKBNR\nQqPPPPPP\n........\n........\n........\n........\npppppppp\nrnbqkbnr\n";
         Assertions.assertEquals(expectedChessBoard, chessBoard.convertChessBoardToString());
     }
 }

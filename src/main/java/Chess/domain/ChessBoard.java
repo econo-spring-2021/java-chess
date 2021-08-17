@@ -21,10 +21,19 @@ public class ChessBoard {
             ChessUnitType.ROOK
     };
 
+    private static ChessBoard instance = new ChessBoard();
+    public static ChessBoard getInstance() { return instance; }
+
     private List<List<ChessUnit>> chessBoard = new ArrayList<>();
 
-    public ChessBoard() {
+    private ChessBoard() {
+        initializeChessGame();
+    }
+
+    public void initializeChessGame(){
+        chessBoard.clear();
         initializeChessboard();
+        initializeChessUnit();
     }
 
     private void initializeChessboard() {
@@ -37,7 +46,7 @@ public class ChessBoard {
         }
     }
 
-    public void initializeChessUnit() {
+    private void initializeChessUnit() {
         for (int i = 0; i < CHESSBOARD_COLUMN; i++) {
             setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], true));
             setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, true));

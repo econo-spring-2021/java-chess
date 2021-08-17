@@ -3,10 +3,10 @@ package Chess.domain;
 import Chess.view.OutputView;
 
 public class Game {
-    ChessBoard chessBoard = new ChessBoard();
+    ChessBoard chessBoard = ChessBoard.getInstance();
 
     public void initializeGame() {
-        chessBoard.initializeChessUnit();
+        chessBoard.initializeChessGame();
     }
 
     public void showChessBoard() {
