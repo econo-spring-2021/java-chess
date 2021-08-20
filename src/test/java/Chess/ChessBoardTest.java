@@ -48,16 +48,4 @@ public class ChessBoardTest {
         Assertions.assertThrows(IndexOutOfBoundsException.class,
                 () -> chessBoard.setUnitFromCell(ChessBoard.CHESSBOARD_ROW + 1, ChessBoard.CHESSBOARD_COLUMN + 1, new ChessUnit()));
     }
-
-    @Test
-    @DisplayName("체스판을 제대로 문자열로 변환하는지")
-    void test_convertChessBoardToString() {
-        chessBoard.setUnitFromCell(0, 0, new ChessUnit(ChessUnitType.KING, true));
-        chessBoard.setUnitFromCell(0, 1, new ChessUnit(ChessUnitType.KING, false));
-        chessBoard.setUnitFromCell(1, 0, new ChessUnit(ChessUnitType.QUEEN, true));
-        chessBoard.setUnitFromCell(1, 1, new ChessUnit(ChessUnitType.QUEEN, false));
-
-        String expectedChessBoard = "KkBQKBNR\nQqPPPPPP\n........\n........\n........\n........\npppppppp\nrnbqkbnr\n";
-        Assertions.assertEquals(expectedChessBoard, chessBoard.convertChessBoardToString());
-    }
 }
