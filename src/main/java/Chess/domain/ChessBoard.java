@@ -40,7 +40,7 @@ public class ChessBoard {
         for (int i = 0; i < CHESSBOARD_ROW; i++) {
             List<ChessUnit> boardRow = new ArrayList<>();
             for (int j = 0; j < CHESSBOARD_COLUMN; j++) {
-                boardRow.add(new ChessUnit(ChessUnitType.EMPTY, true));
+                boardRow.add(new ChessUnit());
             }
             chessBoard.add(boardRow);
         }
@@ -48,10 +48,10 @@ public class ChessBoard {
 
     private void initializeChessUnit() {
         for (int i = 0; i < CHESSBOARD_COLUMN; i++) {
-            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], true));
-            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, true));
-            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], false));
-            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, false));
+            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], ChessUnitColor.BLACK));
+            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, ChessUnitColor.BLACK));
+            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], ChessUnitColor.WHITE));
+            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, ChessUnitColor.WHITE));
         }
     }
 

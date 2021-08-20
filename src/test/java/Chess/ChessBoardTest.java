@@ -2,6 +2,7 @@ package Chess;
 
 import Chess.domain.ChessBoard;
 import Chess.domain.ChessUnit;
+import Chess.domain.ChessUnitColor;
 import Chess.domain.ChessUnitType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +31,7 @@ public class ChessBoardTest {
     @Test
     @DisplayName("올바르게 체스말을 조회하는지")
     void test_getUnitFromCell() {
-        ChessUnit testUnit = new ChessUnit(ChessUnitType.KING, true);
+        ChessUnit testUnit = new ChessUnit(ChessUnitType.KING, ChessUnitColor.BLACK);
         chessBoard.setUnitFromCell(0, 0, testUnit);
         Assertions.assertEquals(testUnit, chessBoard.getUnitFromCell(0, 0));
     }
