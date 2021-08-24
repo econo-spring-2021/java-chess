@@ -1,7 +1,6 @@
 package Chess;
 
-import Chess.domain.ChessUnit.Knight;
-import Chess.domain.ChessUnit.Rook;
+import Chess.domain.ChessUnit.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,7 @@ class ChessUnitTest {
     @DisplayName("나이트가 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
     void test_knight_isAbleToMove_impossibleMovement() {
         Knight knight = new Knight();
-        Assertions.assertFalse(knight.isAbleToMove(4, 4, 4, 10));
+        Assertions.assertFalse(knight.isAbleToMove(4, 4, 5, 5));
     }
 
     @Test
@@ -34,5 +33,54 @@ class ChessUnitTest {
     void test_knight_isAbleToMove_possibleMovement() {
         Knight knight = new Knight();
         Assertions.assertTrue(knight.isAbleToMove(4, 4, 6, 5));
+    }
+
+    @Test
+    @DisplayName("킹이 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
+    void test_king_isAbleToMove_impossibleMovement() {
+        Knight king = new Knight();
+        Assertions.assertFalse(king.isAbleToMove(5, 5, 3, 3));
+    }
+
+    @Test
+    @DisplayName("킹이 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
+    void test_king_isAbleToMove_possibleMovement() {
+        King king = new King();
+        Assertions.assertTrue(king.isAbleToMove(5, 5, 6, 6));
+    }
+
+    @Test
+    @DisplayName("비숍이 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
+    void test_bishop_isAbleToMove_impossibleMovement() {
+        Bishop bishop = new Bishop();
+        Assertions.assertFalse(bishop.isAbleToMove(5, 5, 5, 10));
+    }
+
+    @Test
+    @DisplayName("비숍이 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
+    void test_bishop_isAbleToMove_possibleMovement() {
+        Bishop bishop = new Bishop();
+        Assertions.assertTrue(bishop.isAbleToMove(5, 5, 8, 8));
+    }
+
+    @Test
+    @DisplayName("퀸이 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
+    void test_queen_isAbleToMove_impossibleMovement() {
+        Queen queen = new Queen();
+        Assertions.assertFalse(queen.isAbleToMove(4, 4, 5, 6));
+    }
+
+    @Test
+    @DisplayName("퀸이 움직일 수 있는 움직임(킹)에 대해 올바르게 판단하는개")
+     void test_queen_isAbleToMove_kingMovement() {
+        Queen queen = new Queen();
+        Assertions.assertTrue(queen.isAbleToMove(5, 5, 6, 6));
+    }
+
+    @Test
+    @DisplayName("퀸이 움직일 수 있는 움직임(비숍)에 대해 올바르게 판단하는개")
+    void test_queen_isAbleToMove_bishopMovement() {
+        Queen queen = new Queen();
+        Assertions.assertTrue(queen.isAbleToMove(5, 5, 8, 8));
     }
 }
