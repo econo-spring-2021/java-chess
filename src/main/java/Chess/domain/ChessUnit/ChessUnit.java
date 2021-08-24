@@ -1,6 +1,6 @@
-package Chess.domain;
+package Chess.domain.ChessUnit;
 
-public class ChessUnit {
+public abstract class ChessUnit {
     ChessUnitType type;
     ChessUnitColor color;
 
@@ -25,4 +25,6 @@ public class ChessUnit {
 
         return type.getBlackSymbol();
     }
+
+    public abstract boolean isAbleToMove(int fromR, int fromC, int toR, int toC);
 }

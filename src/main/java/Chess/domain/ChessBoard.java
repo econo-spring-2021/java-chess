@@ -1,5 +1,10 @@
 package Chess.domain;
 
+import Chess.domain.ChessUnit.ChessUnit;
+import Chess.domain.ChessUnit.ChessUnitColor;
+import Chess.domain.ChessUnit.ChessUnitType;
+import Chess.domain.ChessUnit.Rook;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +45,7 @@ public class ChessBoard {
         for (int i = 0; i < CHESSBOARD_ROW; i++) {
             List<ChessUnit> boardRow = new ArrayList<>();
             for (int j = 0; j < CHESSBOARD_COLUMN; j++) {
-                boardRow.add(new ChessUnit());
+                boardRow.add(new Rook());
             }
             chessBoard.add(boardRow);
         }
@@ -48,10 +53,15 @@ public class ChessBoard {
 
     private void initializeChessUnit() {
         for (int i = 0; i < CHESSBOARD_COLUMN; i++) {
-            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], ChessUnitColor.BLACK));
-            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, ChessUnitColor.BLACK));
-            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], ChessUnitColor.WHITE));
-            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, ChessUnitColor.WHITE));
+//            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], ChessUnitColor.BLACK));
+//            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, ChessUnitColor.BLACK));
+//            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], ChessUnitColor.WHITE));
+//            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, ChessUnitColor.WHITE));
+
+            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new Rook());
+            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new Rook());
+            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new Rook());
+            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new Rook());
         }
     }
 
