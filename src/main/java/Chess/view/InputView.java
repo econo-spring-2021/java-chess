@@ -23,7 +23,7 @@ public class InputView {
             List<String> commands = Arrays.asList(input.split(" "));
             String command = commands.get(0);
             if (!command.equals(GAME_START_COMMAND) && !command.equals(GAME_END_COMMAND) && !command.equals(GAME_MOVE_COMMAND)) {
-                throw new InvalidUserInputException("올바르지 않은 커멘드입니다.");
+                throw new InvalidUserInputException("올바르지 않은 명령어입니다.");
             }
 
             if (command.equals(GAME_MOVE_COMMAND)) {
@@ -40,7 +40,11 @@ public class InputView {
 
     private static void validateMoveCommand(List<String> commands) throws InvalidUserInputException {
         if (commands.size() != 3) {
-            throw new InvalidUserInputException("알맞은 갯수의 커멘드를 입력하세요.");
+            throw new InvalidUserInputException("알맞은 갯수의 명령어를 입력하세요.");
+        }
+
+        if (commands.get(1).equals(2)) {
+            throw new InvalidUserInputException("같은 위치로 움직일 수 없습니다.");
         }
 
         Pattern specialCharactersPattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);

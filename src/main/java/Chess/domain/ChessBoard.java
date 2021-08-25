@@ -9,10 +9,10 @@ import java.util.List;
 public class ChessBoard {
     public static final int CHESSBOARD_ROW = 8;
     public static final int CHESSBOARD_COLUMN = 8;
-    public static final int WHITE_SPECIAL_CHESS_UNIT_ROW = 0;
-    public static final int WHITE_PAWN_CHESS_INIT_ROW = 1;
-    public static final int BLACK_PAWN_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 2;
-    public static final int BLACK_SPECIAL_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 1;
+    public static final int WHITE_SPECIAL_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 1;
+    public static final int WHITE_PAWN_CHESS_INIT_ROW = ChessBoard.CHESSBOARD_ROW - 2;
+    public static final int BLACK_PAWN_CHESS_UNIT_ROW = 1;
+    public static final int BLACK_SPECIAL_CHESS_UNIT_ROW = 0;
     public static final List<Class<? extends ChessUnit>> INITIAL_SPECIAL_CHESS_UNIT_POSITION = Arrays.asList(
             Rook.class,
             Knight.class,
@@ -75,9 +75,9 @@ public class ChessBoard {
 
     public String convertChessBoardToString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int r = CHESSBOARD_ROW - 1; r >= 0; r--) {
-            for (int c = 0; c < CHESSBOARD_COLUMN; c++) {
-                stringBuilder.append(chessBoard.get(r).get(c).getTypeSymbol());
+        for (List<ChessUnit> row : chessBoard) {
+            for (ChessUnit unit : row) {
+                stringBuilder.append(unit.getTypeSymbol());
             }
             stringBuilder.append('\n');
         }

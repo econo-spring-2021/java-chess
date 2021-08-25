@@ -41,11 +41,11 @@ public class Pawn extends ChessUnit {
     }
 
     private boolean isRightDirectionMove(int fromR, int toR) {
-        if (color == ChessUnitColor.WHITE && fromR - toR > 0) {
+        if (color == ChessUnitColor.WHITE && fromR - toR < 0) {
             return false;
         }
 
-        if (color == ChessUnitColor.BLACK && fromR - toR < 0) {
+        if (color == ChessUnitColor.BLACK && fromR - toR > 0) {
             return false;
         }
 

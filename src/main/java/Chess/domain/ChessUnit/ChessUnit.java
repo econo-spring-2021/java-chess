@@ -28,6 +28,10 @@ public abstract class ChessUnit {
         return type.getBlackSymbol();
     }
 
+    public ChessUnitColor getColor() {
+        return color;
+    }
+
     public void move(int fromR, int fromC, int toR, int toC) {
         ChessBoard.getInstance().setUnitFromCell(toR, toC, this);
         ChessBoard.getInstance().setUnitFromCell(fromR, fromC, new EmptyCell());

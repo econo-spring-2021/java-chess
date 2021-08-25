@@ -1,5 +1,6 @@
 package Chess.controller;
 
+import Chess.domain.ChessBoard;
 import Chess.domain.Game;
 import Chess.view.InputView;
 import Chess.view.OutputView;
@@ -51,19 +52,12 @@ public class GameController {
     }
 
     private void executeMoveCommand(List<String> args) {
-        try {
-            if (!game.isGameStarted()) {
-                throw new IllegalArgumentException("게임 시작 전에 체스말을 움직일 수 없습니다");
-            }
+        int fromR = args.get(0).charAt(1) - '0';
+        int fromC = args.get(0).charAt(0) - 'a';
+        int toR = args.get(1).charAt(1) - '0';
+        int toC = args.get(1).charAt(0) - 'a';
 
-            int fromR = args.get(0).charAt(1) - '0';
-            int fromC = args.get(0).charAt(0) - 'a';
-            int toR = args.get(1).charAt(1) - '0';
-            int toC = args.get(1).charAt(0) - 'a';
-
-
-        } catch (IllegalArgumentException e) {
-            OutputView.printException(e);
-        }
+        game.moveChessUnit(fromR, fromC, toR, toC);
+        game.showChessBoard();
     }
 }
