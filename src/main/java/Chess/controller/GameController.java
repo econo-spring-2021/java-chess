@@ -4,6 +4,10 @@ import Chess.domain.Game;
 import Chess.view.InputView;
 import Chess.view.OutputView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class GameController {
     Game game = new Game();
 
@@ -11,9 +15,55 @@ public class GameController {
         OutputView.announceGameStart();
         OutputView.askGameOperationCommand();
 
-        while (!InputView.getGameOperationCommand().equals(InputView.GAME_END_COMMAND)) {
-            game.initializeGame();
-            game.showChessBoard();
+        loopForCommand();
+    }
+
+    private void loopForCommand() {
+        while (true) {
+            List<String> commands = InputView.getGameOperationCommands();
+            String command = commands.get(0);
+            if (command.equals(InputView.GAME_END_COMMAND)) {
+                return;
+            }
+
+            List<String> args = new ArrayList<>();
+            if (commands.size() > 1) {
+                args = commands.subList(1, commands.size());
+            }
+            executeCommand(command, args);
+        }
+    }
+
+    private void executeCommand(String command, List<String> args) {
+        switch (command) {
+            case InputView.GAME_START_COMMAND:
+                executeStartCommand();
+                break;
+            case InputView.GAME_MOVE_COMMAND:
+                executeMoveCommand(args);
+                break;
+        }
+    }
+
+    private void executeStartCommand() {
+        game.initializeGame();
+        game.showChessBoard();
+    }
+
+    private void executeMoveCommand(List<String> args) {
+        try {
+            if (!game.isGameStarted()) {
+                throw new IllegalArgumentException("게임 시작 전에 체스말을 움직일 수 없습니다");
+            }
+
+            int fromR = args.get(0).charAt(1) - '0';
+            int fromC = args.get(0).charAt(0) - 'a';
+            int toR = args.get(1).charAt(1) - '0';
+            int toC = args.get(1).charAt(0) - 'a';
+
+
+        } catch (IllegalArgumentException e) {
+            OutputView.printException(e);
         }
     }
 }
