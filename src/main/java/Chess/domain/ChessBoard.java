@@ -1,9 +1,6 @@
 package Chess.domain;
 
-import Chess.domain.ChessUnit.ChessUnit;
-import Chess.domain.ChessUnit.ChessUnitColor;
-import Chess.domain.ChessUnit.ChessUnitType;
-import Chess.domain.ChessUnit.Rook;
+import Chess.domain.ChessUnit.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +23,7 @@ public class ChessBoard {
             ChessUnitType.ROOK
     };
 
-    private static ChessBoard instance = new ChessBoard();
+    private final static ChessBoard instance = new ChessBoard();
     public static ChessBoard getInstance() { return instance; }
 
     private List<List<ChessUnit>> chessBoard = new ArrayList<>();
@@ -45,7 +42,7 @@ public class ChessBoard {
         for (int i = 0; i < CHESSBOARD_ROW; i++) {
             List<ChessUnit> boardRow = new ArrayList<>();
             for (int j = 0; j < CHESSBOARD_COLUMN; j++) {
-                boardRow.add(new Rook());
+                boardRow.add(new EmptyCell());
             }
             chessBoard.add(boardRow);
         }

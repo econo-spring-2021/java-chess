@@ -2,7 +2,7 @@ package Chess.domain.ChessUnit;
 
 public class Queen extends ChessUnit {
     public Queen() {
-        super(ChessUnitType.QUEEN, ChessUnitColor.BLACK);
+        super(ChessUnitType.QUEEN);
     }
 
     public Queen(ChessUnitColor color) {

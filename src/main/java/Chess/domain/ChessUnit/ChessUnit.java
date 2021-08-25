@@ -4,9 +4,9 @@ public abstract class ChessUnit {
     ChessUnitType type;
     ChessUnitColor color;
 
-    public ChessUnit() {
-        this.type = ChessUnitType.EMPTY;
-        this.color = ChessUnitColor.BLACK;
+    public ChessUnit(ChessUnitType type) {
+        this.type = type;
+        this.color = ChessUnitColor.WHITE;
     }
 
     public ChessUnit(ChessUnitType type, ChessUnitColor color) {

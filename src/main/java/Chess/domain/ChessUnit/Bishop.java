@@ -2,7 +2,7 @@ package Chess.domain.ChessUnit;
 
 public class Bishop extends ChessUnit {
     public Bishop() {
-        super(ChessUnitType.BISHOP, ChessUnitColor.BLACK);
+        super(ChessUnitType.BISHOP);
     }
 
     public Bishop(ChessUnitColor color) {

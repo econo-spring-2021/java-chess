@@ -2,7 +2,7 @@ package Chess.domain.ChessUnit;
 
 public class Rook extends ChessUnit {
     public Rook() {
-        super(ChessUnitType.ROOK, ChessUnitColor.BLACK);
+        super(ChessUnitType.ROOK);
     }
 
     public Rook(ChessUnitColor color) {
