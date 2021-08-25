@@ -38,4 +38,21 @@ public abstract class ChessUnit {
     }
 
     public abstract boolean isAbleToMove(int fromR, int fromC, int toR, int toC);
+
+    protected boolean isExistTeammateOnDestination(int toR, int toC) {
+        ChessUnit unit = ChessBoard.getInstance().getUnitFromCell(toR, toC);
+        if (unit instanceof EmptyCell || color != unit.getColor()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected int getNextPositionToCheck(int from, int to) {
+        if (from < to) {
+            return from + 1;
+        }
+
+        return from - 1;
+    }
 }

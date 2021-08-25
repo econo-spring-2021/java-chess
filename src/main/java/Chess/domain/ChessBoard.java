@@ -65,6 +65,14 @@ public class ChessBoard {
         }
     }
 
+    public void resetChessUnitOnChessBoard() {
+        for (int i = 0; i < CHESSBOARD_ROW; i++) {
+            for (int j = 0; j < CHESSBOARD_COLUMN; j++) {
+                setUnitFromCell(i, j, new EmptyCell());
+            }
+        }
+    }
+
     public ChessUnit getUnitFromCell(int r, int c) throws IndexOutOfBoundsException {
         return chessBoard.get(r).get(c);
     }
