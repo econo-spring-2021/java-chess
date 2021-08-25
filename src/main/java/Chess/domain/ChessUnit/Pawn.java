@@ -14,8 +14,17 @@ public class Pawn extends ChessUnit {
     }
 
     @Override
+    public void move(int fromR, int fromC, int toR, int toC) {
+        if (isFirstMovement) {
+            isFirstMovement = false;
+        }
+
+        super.move(fromR, fromC, toR, toC);
+    }
+
+    @Override
     public boolean isAbleToMove(int fromR, int fromC, int toR, int toC) {
-        if (!isRightDirectionMove(fromR, fromC, toR, toC)) {
+        if (!isRightDirectionMove(fromR, toR)) {
             return false;
         }
 
@@ -24,14 +33,14 @@ public class Pawn extends ChessUnit {
             return true;
         }
 
-        if (isFirstMovement && isAbleFirstMove(fromR, fromC, toR, toC)) {
+        if (isFirstMovement && isAbleFirstMove(fromR, toR)) {
             return true;
         }
 
-        return isAbleMove(fromR, fromC, toR, toC);
+        return isAbleMove(fromR, toR);
     }
 
-    private boolean isRightDirectionMove(int fromR, int fromC, int toR, int toC) {
+    private boolean isRightDirectionMove(int fromR, int toR) {
         if (color == ChessUnitColor.WHITE && fromR - toR > 0) {
             return false;
         }
@@ -51,7 +60,7 @@ public class Pawn extends ChessUnit {
         return true;
     }
 
-    private boolean isAbleFirstMove(int fromR, int fromC, int toR, int toC) {
+    private boolean isAbleFirstMove(int fromR, int toR) {
         if (Math.abs(fromR - toR) > 2) {
             return false;
         }
@@ -59,8 +68,8 @@ public class Pawn extends ChessUnit {
         return true;
     }
 
-    private boolean isAbleMove(int fromR, int fromC, int toR, int toC) {
-        if (Math.abs(fromR - fromC) != 1) {
+    private boolean isAbleMove(int fromR, int toR) {
+        if (Math.abs(fromR - toR) != 1) {
             return false;
         }
 

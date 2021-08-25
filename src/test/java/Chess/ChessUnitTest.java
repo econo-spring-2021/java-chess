@@ -9,11 +9,6 @@ import org.junit.jupiter.api.Test;
 
 class ChessUnitTest {
 
-    @BeforeEach
-    void initializeChessBoard() {
-        ChessBoard.getInstance().initializeChessGame();
-    }
-
     @Test
     @DisplayName("룩이 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
     void test_rook_isAbleToMove_impossibleMovement() {
@@ -95,6 +90,9 @@ class ChessUnitTest {
     @DisplayName("폰이 반대 방향 움직임에 대해 올바르게 판단하는개")
     void test_pawn_isAbleToMove_impossibleOppositeMovement() {
         Pawn pawn = new Pawn();
+        ChessBoard.getInstance().initializeChessGame();
+        ChessBoard.getInstance().setUnitFromCell(4, 5, new EmptyCell());
+
         Assertions.assertFalse(pawn.isAbleToMove(5, 5, 4, 5));
     }
 
@@ -102,6 +100,9 @@ class ChessUnitTest {
     @DisplayName("폰이 첫 이동에서 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
     void test_pawn_isAbleToMove_impossibleFirstMovement() {
         Pawn pawn = new Pawn();
+        ChessBoard.getInstance().initializeChessGame();
+        ChessBoard.getInstance().setUnitFromCell(7, 4, new EmptyCell());
+
         Assertions.assertFalse(pawn.isAbleToMove(4, 4, 7, 4));
     }
 
@@ -109,36 +110,53 @@ class ChessUnitTest {
     @DisplayName("폰이 첫 이동에서 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
     void test_pawn_isAbleToMove_possibleFirstMovement() {
         Pawn pawn = new Pawn();
+        ChessBoard.getInstance().initializeChessGame();
+        ChessBoard.getInstance().setUnitFromCell(6, 4, new EmptyCell());
+
         Assertions.assertTrue(pawn.isAbleToMove(4, 4, 6, 4));
     }
 
-//    @Test
-//    @DisplayName("폰이 첫 이동 이후에서 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
-//    void test_pawn_isAbleToMove_impossibleMovement() {
-//        Pawn pawn = new Pawn();
-//        Assertions.assertTrue(pawn.isAbleToMove(5, 5, 7, 5));
-//        Assertions.assertTrue(pawn.isAbleToMove(7, 5, 9, 5));
-//    }
-//
-//    @Test
-//    @DisplayName("폰이 첫 이동 이후에서 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
-//    void test_pawn_isAbleToMove_possibleMovemet() {
-//        Pawn pawn = new Pawn();
-//        Assertions.assertTrue(pawn.isAbleToMove(5, 5, 7, 5));
-//        Assertions.assertTrue(pawn.isAbleToMove(7, 5, 8, 5));
-//    }
-//
-//    @Test
-//    @DisplayName("폰이 적을 잡을 때 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
-//    void test_pawn_isAbleToMove_impossibleAttackMovement() {
-//        Pawn pawn = new Pawn(ChessUnitColor.BLACK);
-//        Assertions.assertTrue(pawn.isAbleToMove(5, 5, 7, 6));
-//    }
-//
-//    @Test
-//    @DisplayName("폰이 적을 잡을 때 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
-//    void test_pawn_isAbleToMove_possibleAttackMovement() {
-//        Pawn pawn = new Pawn(ChessUnitColor.BLACK);
-//        Assertions.assertTrue(pawn.isAbleToMove(5, 5, 6, 6));
-//    }
+    @Test
+    @DisplayName("폰이 첫 이동 이후에서 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
+    void test_pawn_isAbleToMove_impossibleMovement() {
+        Pawn pawn = new Pawn();
+        ChessBoard.getInstance().initializeChessGame();
+        ChessBoard.getInstance().setUnitFromCell(5, 3, new EmptyCell());
+        ChessBoard.getInstance().setUnitFromCell(7, 3, new EmptyCell());
+
+        pawn.move(3, 3, 5, 3);
+        Assertions.assertFalse(pawn.isAbleToMove(5, 3, 7, 3));
+    }
+
+    @Test
+    @DisplayName("폰이 첫 이동 이후에서 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
+    void test_pawn_isAbleToMove_possibleMovement() {
+        Pawn pawn = new Pawn();
+        ChessBoard.getInstance().initializeChessGame();
+        ChessBoard.getInstance().setUnitFromCell(5, 3, new EmptyCell());
+        ChessBoard.getInstance().setUnitFromCell(6, 3, new EmptyCell());
+
+        pawn.move(3, 3, 5, 3);
+        Assertions.assertTrue(pawn.isAbleToMove(5, 3, 6, 3));
+    }
+
+    @Test
+    @DisplayName("폰이 적을 잡을 때 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
+    void test_pawn_isAbleToMove_impossibleAttackMovement() {
+        Pawn pawn = new Pawn();
+        ChessBoard.getInstance().initializeChessGame();
+        ChessBoard.getInstance().setUnitFromCell(7, 6, new Pawn(ChessUnitColor.BLACK));
+
+        Assertions.assertTrue(pawn.isAbleToMove(5, 5, 7, 6));
+    }
+
+    @Test
+    @DisplayName("폰이 적을 잡을 때 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
+    void test_pawn_isAbleToMove_possibleAttackMovement() {
+        Pawn pawn = new Pawn();
+        ChessBoard.getInstance().initializeChessGame();
+        ChessBoard.getInstance().setUnitFromCell(6, 6, new Pawn(ChessUnitColor.BLACK));
+
+        Assertions.assertTrue(pawn.isAbleToMove(5, 5, 6, 6));
+    }
 }
