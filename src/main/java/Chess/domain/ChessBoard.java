@@ -7,13 +7,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ChessBoard {
-    public static int CHESSBOARD_ROW = 8;
-    public static int CHESSBOARD_COLUMN = 8;
-    public static int WHITE_SPECIAL_CHESS_UNIT_ROW = 0;
-    public static int WHITE_PAWN_CHESS_INIT_ROW = 1;
-    public static int BLACK_PAWN_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 2;
-    public static int BLACK_SPECIAL_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 1;
-    public static List<Class<? extends ChessUnit>> INITIAL_SPECIAL_CHESS_UNIT_POSITION = Arrays.asList(
+    public static final int CHESSBOARD_ROW = 8;
+    public static final int CHESSBOARD_COLUMN = 8;
+    public static final int WHITE_SPECIAL_CHESS_UNIT_ROW = 0;
+    public static final int WHITE_PAWN_CHESS_INIT_ROW = 1;
+    public static final int BLACK_PAWN_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 2;
+    public static final int BLACK_SPECIAL_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 1;
+    public static final List<Class<? extends ChessUnit>> INITIAL_SPECIAL_CHESS_UNIT_POSITION = Arrays.asList(
             Rook.class,
             Knight.class,
             Bishop.class,
