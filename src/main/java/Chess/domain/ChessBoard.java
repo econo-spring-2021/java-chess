@@ -3,28 +3,32 @@ package Chess.domain;
 import Chess.domain.ChessUnit.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChessBoard {
     public static int CHESSBOARD_ROW = 8;
     public static int CHESSBOARD_COLUMN = 8;
-    public static int BLACK_SPECIAL_CHESS_UNIT_ROW = 0;
-    public static int BLACK_PAWN_CHESS_UNIT_ROW = 1;
-    public static int WHITE_SPECIAL_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 1;
-    public static int WHITE_PAWN_CHESS_INIT_ROW = ChessBoard.CHESSBOARD_ROW - 2;
-    public static ChessUnitType[] INITIAL_SPECIAL_CHESS_UNIT_POSITION = {
-            ChessUnitType.ROOK,
-            ChessUnitType.KNIGHT,
-            ChessUnitType.BISHOP,
-            ChessUnitType.QUEEN,
-            ChessUnitType.KING,
-            ChessUnitType.BISHOP,
-            ChessUnitType.KNIGHT,
-            ChessUnitType.ROOK
-    };
+    public static int WHITE_SPECIAL_CHESS_UNIT_ROW = 0;
+    public static int WHITE_PAWN_CHESS_INIT_ROW = 1;
+    public static int BLACK_PAWN_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 2;
+    public static int BLACK_SPECIAL_CHESS_UNIT_ROW = ChessBoard.CHESSBOARD_ROW - 1;
+    public static List<Class<? extends ChessUnit>> INITIAL_SPECIAL_CHESS_UNIT_POSITION = Arrays.asList(
+            Rook.class,
+            Knight.class,
+            Bishop.class,
+            Queen.class,
+            King.class,
+            Bishop.class,
+            Knight.class,
+            Rook.class
+    );
 
     private final static ChessBoard instance = new ChessBoard();
-    public static ChessBoard getInstance() { return instance; }
+
+    public static ChessBoard getInstance() {
+        return instance;
+    }
 
     private List<List<ChessUnit>> chessBoard = new ArrayList<>();
 
@@ -32,10 +36,14 @@ public class ChessBoard {
         initializeChessGame();
     }
 
-    public void initializeChessGame(){
-        chessBoard.clear();
-        initializeChessboard();
-        initializeChessUnit();
+    public void initializeChessGame() {
+        try {
+            chessBoard.clear();
+            initializeChessboard();
+            initializeChessUnit();
+        } catch (Exception e) {
+            initializeChessboard();
+        }
     }
 
     private void initializeChessboard() {
@@ -48,17 +56,12 @@ public class ChessBoard {
         }
     }
 
-    private void initializeChessUnit() {
+    private void initializeChessUnit() throws Exception {
         for (int i = 0; i < CHESSBOARD_COLUMN; i++) {
-//            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], ChessUnitColor.BLACK));
-//            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, ChessUnitColor.BLACK));
-//            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new ChessUnit(INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], ChessUnitColor.WHITE));
-//            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new ChessUnit(ChessUnitType.PAWN, ChessUnitColor.WHITE));
-
-            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, new Rook());
-            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new Rook());
-            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, new Rook());
-            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new Rook());
+            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(ChessUnitColor.class).newInstance(ChessUnitColor.BLACK));
+            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new Pawn(ChessUnitColor.BLACK));
+            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(ChessUnitColor.class).newInstance(ChessUnitColor.WHITE));
+            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new Pawn(ChessUnitColor.WHITE));
         }
     }
 
@@ -72,9 +75,9 @@ public class ChessBoard {
 
     public String convertChessBoardToString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (List<ChessUnit> row : chessBoard) {
-            for (ChessUnit unit : row) {
-                stringBuilder.append(unit.getTypeSymbol());
+        for (int r = CHESSBOARD_ROW - 1; r >= 0; r--) {
+            for (int c = 0; c < CHESSBOARD_COLUMN; c++) {
+                stringBuilder.append(chessBoard.get(r).get(c).getTypeSymbol());
             }
             stringBuilder.append('\n');
         }

@@ -2,8 +2,6 @@ package Chess;
 
 import Chess.domain.ChessBoard;
 import Chess.domain.ChessUnit.ChessUnit;
-import Chess.domain.ChessUnit.ChessUnitColor;
-import Chess.domain.ChessUnit.ChessUnitType;
 import Chess.domain.ChessUnit.Rook;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
