@@ -1,27 +1,25 @@
 package Chess.domain.ChessUnit;
 
 public enum ChessUnitType {
-    KING('K', 'k'),
-    QUEEN('Q', 'q'),
-    ROOK('R', 'r'),
-    BISHOP('B', 'b'),
-    KNIGHT('N', 'n'),
-    PAWN('P', 'p'),
-    EMPTY('.', '.');
+    KING("k"),
+    QUEEN("q"),
+    ROOK("r"),
+    BISHOP("b"),
+    KNIGHT("n"),
+    PAWN("p"),
+    EMPTY(".");
 
-    private Character black;
-    private Character white;
+    private String type;
 
-    ChessUnitType(Character black, Character white) {
-        this.black = black;
-        this.white = white;
+    ChessUnitType(String type) {
+        this.type = type;
     }
 
-    public Character getBlackSymbol() {
-        return black;
+    public String getBlackSymbol() {
+        return type.toUpperCase();
     }
 
-    public Character getWhiteSymbol() {
-        return white;
+    public String getWhiteSymbol() {
+        return type.toLowerCase();
     }
 }

@@ -20,7 +20,7 @@ public abstract class ChessUnit {
         return type;
     }
 
-    public Character getTypeSymbol() {
+    public String getTypeSymbol() {
         if (color == ChessUnitColor.WHITE) {
             return type.getWhiteSymbol();
         }
