@@ -36,6 +36,10 @@ public class ChessBoard {
         initializeChessGame();
     }
 
+    public static int convertInputRowToDataRow(int row) {
+        return CHESSBOARD_ROW - row;
+    }
+
     public void initializeChessGame() {
         try {
             chessBoard.clear();

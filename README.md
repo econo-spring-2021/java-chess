@@ -22,8 +22,8 @@
 * [x] 목적이에 아군이 있는 경우, 체스말의 isAbleToMove() 수정
 * [x] Move() 관련하여 부족한 테스트 코드 추가
 
-# 2 step Feedback
+# 2 step Feedback 
 * [x] 피드백 응답
-* [ ] 이동 명령의 좌표 파싱을 controller에서 view로 
+* [x] 이동 명령의 좌표 파싱을 controller에서 view로 
 * [ ] ChessBoard의 타입을 List에서 Array로
 * [ ] ChessUnitType의 대소문자 필드를 통일하고 toUpperCase()/toLowerCase() 활용

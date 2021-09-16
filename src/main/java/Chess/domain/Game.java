@@ -28,8 +28,8 @@ public class Game {
                 throw new IllegalArgumentException("게임 시작 전에 체스말을 움직일 수 없습니다");
             }
 
-            fromR = convertInputRowToDataRow(fromR);
-            toR = convertInputRowToDataRow(toR);
+            fromR = ChessBoard.convertInputRowToDataRow(fromR);
+            toR = ChessBoard.convertInputRowToDataRow(toR);
 
             ChessUnit unit = chessBoard.getUnitFromCell(fromR, fromC);
             if (unit instanceof EmptyCell) {
@@ -44,9 +44,5 @@ public class Game {
         } catch (Exception e) {
             OutputView.printException(e);
         }
-    }
-
-    private int convertInputRowToDataRow(int row) {
-        return ChessBoard.CHESSBOARD_ROW - row;
     }
 }

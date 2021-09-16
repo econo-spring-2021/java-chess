@@ -52,10 +52,10 @@ public class GameController {
     }
 
     private void executeMoveCommand(List<String> args) {
-        int fromR = args.get(0).charAt(1) - '0';
-        int fromC = args.get(0).charAt(0) - 'a';
-        int toR = args.get(1).charAt(1) - '0';
-        int toC = args.get(1).charAt(0) - 'a';
+        int fromR = InputView.convertNumberInputCharToInt(args.get(0).charAt(1));
+        int fromC = InputView.convertLetterInputCharToInt(args.get(0).charAt(0));
+        int toR = InputView.convertNumberInputCharToInt(args.get(1).charAt(1));
+        int toC = InputView.convertLetterInputCharToInt(args.get(1).charAt(0));
 
         game.moveChessUnit(fromR, fromC, toR, toC);
         game.showChessBoard();
