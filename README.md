@@ -25,5 +25,5 @@
 # 2 step Feedback 
 * [x] 피드백 응답
 * [x] 이동 명령의 좌표 파싱을 controller에서 view로 
-* [ ] ChessBoard의 타입을 List에서 Array로
+* [x] ChessBoard의 타입을 List에서 Array로
 * [ ] ChessUnitType의 대소문자 필드를 통일하고 toUpperCase()/toLowerCase() 활용

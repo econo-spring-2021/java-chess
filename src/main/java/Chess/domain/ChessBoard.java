@@ -2,7 +2,6 @@ package Chess.domain;
 
 import Chess.domain.ChessUnit.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class ChessBoard {
         return instance;
     }
 
-    private List<List<ChessUnit>> chessBoard = new ArrayList<>();
+    private ChessUnit[][] chessBoard = new ChessUnit[CHESSBOARD_ROW][CHESSBOARD_COLUMN];
 
     private ChessBoard() {
         initializeChessGame();
@@ -42,7 +41,6 @@ public class ChessBoard {
 
     public void initializeChessGame() {
         try {
-            chessBoard.clear();
             initializeChessboard();
             initializeChessUnit();
         } catch (Exception e) {
@@ -52,11 +50,9 @@ public class ChessBoard {
 
     private void initializeChessboard() {
         for (int i = 0; i < CHESSBOARD_ROW; i++) {
-            List<ChessUnit> boardRow = new ArrayList<>();
             for (int j = 0; j < CHESSBOARD_COLUMN; j++) {
-                boardRow.add(new EmptyCell());
+                chessBoard[i][j] = new EmptyCell();
             }
-            chessBoard.add(boardRow);
         }
     }
 
@@ -78,16 +74,16 @@ public class ChessBoard {
     }
 
     public ChessUnit getUnitFromCell(int r, int c) throws IndexOutOfBoundsException {
-        return chessBoard.get(r).get(c);
+        return chessBoard[r][c];
     }
 
     public void setUnitFromCell(int r, int c, ChessUnit unit) throws IndexOutOfBoundsException {
-        chessBoard.get(r).set(c, unit);
+        chessBoard[r][c] = unit;
     }
 
     public String convertChessBoardToString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (List<ChessUnit> row : chessBoard) {
+        for (ChessUnit[] row : chessBoard) {
             for (ChessUnit unit : row) {
                 stringBuilder.append(unit.getTypeSymbol());
             }
