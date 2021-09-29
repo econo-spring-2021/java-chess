@@ -27,3 +27,9 @@
 * [x] 이동 명령의 좌표 파싱을 controller에서 view로 
 * [x] ChessBoard의 타입을 List에서 Array로
 * [x] ChessUnitType의 대소문자 필드를 통일하고 toUpperCase()/toLowerCase() 활용
+
+# Refactoring after reviewing 
+* [ ] 명명된 이름들 간소화
+* [ ] 체스말 위치&이동에 대한 정보와 관렴 함수들 클래스화 (Position.java)
+* [ ] 게임 로직 코드에서의 Position 클래스와 관련된 예외 처리
+* [ ] 체스말의 interface 리팩토링과 MovableStrategy interface 도입
