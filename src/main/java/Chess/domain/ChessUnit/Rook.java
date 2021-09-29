@@ -1,6 +1,8 @@
 package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
+import Chess.domain.Position;
+import Chess.exception.InvalidUserInputException;
 
 public class Rook extends Unit {
     public Rook() {
@@ -12,55 +14,53 @@ public class Rook extends Unit {
     }
 
     @Override
-    public boolean isAbleToMove(int fromR, int fromC, int toR, int toC) {
-        if (isExistTeammateOnDestination(toR, toC)) {
-            return false;
+    protected void validateIsAbleToMove(Position source, Position destination) {
+        if (isExistTeammateOnDestination(destination)) {
+            throw new InvalidUserInputException("해당 위치에는 팀원이 있습니다.");
         }
 
-        if (!isAbleMovement(fromR, fromC, toR, toC)) {
-            return false;
+        if (!isAbleMovement(source, destination)) {
+            throw new InvalidUserInputException("해당 위치는 움직일 수 없는 경로입니다.");
         }
 
-        if (fromR == toR && isObstacleExistOnColumnPath(fromC, toC, fromR)) {
-            return false;
+        if (source.getRow() == destination.getRow() && isObstacleExistOnColumnPath(source, destination)) {
+            throw new InvalidUserInputException("경로에 장애물이 있습니다.");
         }
 
-        if (fromC == toC && isObstacleExistOnRowPath(fromR, toR, fromC)) {
+        if (source.getCol() == destination.getCol() && isObstacleExistOnRowPath(source, destination)) {
+            throw new InvalidUserInputException("경로에 장애물이 있습니다.");
+        }
+    }
+
+    private boolean isAbleMovement(Position source, Position destination) {
+        if (source.getRow() != destination.getRow() && source.getCol() != destination.getCol()) {
             return false;
         }
 
         return true;
     }
 
-    private boolean isAbleMovement(int fromR, int fromC, int toR, int toC) {
-        if (fromR != toR && fromC != toC) {
-            return false;
-        }
+    private boolean isObstacleExistOnRowPath(Position source, Position destination) {
+        Position position = new Position(source);
+        position.setNextRowToCheck(destination);
 
-        return true;
-    }
-
-    private boolean isObstacleExistOnRowPath(int fromR, int toR, int column) {
-        int row = getNextPositionToCheck(fromR, toR);
-        while (row != toR) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(row, column) instanceof EmptyCell)) {
+        for (;position.getRow() != destination.getRow(); position.setNextRowToCheck(destination)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
                 return true;
             }
-
-            row = getNextPositionToCheck(row, toR);
         }
 
         return false;
     }
 
-    private boolean isObstacleExistOnColumnPath(int fromC, int toC, int row) {
-        int column = getNextPositionToCheck(fromC, toC);
-        while (column != toC) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(row, column) instanceof EmptyCell)) {
+    private boolean isObstacleExistOnColumnPath(Position source, Position destination) {
+        Position position = new Position(source);
+        position.setNextColToCheck(destination);
+
+        for (;position.getCol() != destination.getCol(); position.setNextColToCheck(destination)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
                 return true;
             }
-
-            column = getNextPositionToCheck(column, toC);
         }
 
         return false;

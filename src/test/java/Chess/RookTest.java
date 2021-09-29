@@ -4,6 +4,8 @@ import Chess.domain.ChessBoard;
 import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.Pawn;
 import Chess.domain.ChessUnit.Rook;
+import Chess.domain.Position;
+import Chess.exception.InvalidUserInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,7 +25,7 @@ class RookTest {
         Rook rook = new Rook();
         chessBoard.setUnitFromCell(0, 0, rook);
 
-        Assertions.assertTrue(rook.isAbleToMove(0, 0, 0, 5));
+        //        Assertions.assertDoesNotThrow(() -> rook.move(new Position(0, 0), new Position(0, 5));
     }
 
     @Test
@@ -32,7 +34,7 @@ class RookTest {
         Rook rook = new Rook();
         chessBoard.setUnitFromCell(0, 0, rook);
 
-        Assertions.assertFalse(rook.isAbleToMove(0, 0, 2, 2));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> rook.move(new Position(0, 0), new Position(2, 2)));
     }
 
     @Test
@@ -43,7 +45,7 @@ class RookTest {
         Pawn pawn = new Pawn();
         chessBoard.setUnitFromCell(1, 0, pawn);
 
-        Assertions.assertFalse(rook.isAbleToMove(0, 0, 5, 0));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> rook.move(new Position(0, 0), new Position(5, 0)));
     }
 
     @Test
@@ -54,7 +56,7 @@ class RookTest {
         Pawn pawn = new Pawn();
         chessBoard.setUnitFromCell(5, 0, pawn);
 
-        Assertions.assertFalse(rook.isAbleToMove(0, 0, 5, 0));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> rook.move(new Position(0, 0), new Position(5, 0)));
     }
 
     @Test
@@ -65,6 +67,6 @@ class RookTest {
         Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(5, 0, pawn);
 
-        Assertions.assertTrue(rook.isAbleToMove(0, 0, 5, 0));
+        //        Assertions.assertDoesNotThrow(() -> rook.move(new Position(0, 0), new Position(5, 0));
     }
 }

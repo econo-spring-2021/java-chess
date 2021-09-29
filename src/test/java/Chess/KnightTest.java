@@ -2,6 +2,8 @@ package Chess;
 
 import Chess.domain.ChessBoard;
 import Chess.domain.ChessUnit.*;
+import Chess.domain.Position;
+import Chess.exception.InvalidUserInputException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,14 +21,14 @@ class KnightTest {
     @DisplayName("나이트가 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
     void test_knight_isAbleToMove_possibleMovement() {
         Knight knight = new Knight();
-        Assertions.assertTrue(knight.isAbleToMove(4, 4, 6, 5));
+        //        Assertions.assertDoesNotThrow(() -> bishop.move(new Position(4, 4), new Position(6, 5)));
     }
 
     @Test
     @DisplayName("나이트가 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
     void test_knight_isAbleToMove_impossibleMovement() {
         Knight knight = new Knight();
-        Assertions.assertFalse(knight.isAbleToMove(4, 4, 5, 5));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> knight.move(new Position(4, 4), new Position(5, 5)));
     }
 
 
@@ -38,7 +40,7 @@ class KnightTest {
         Pawn pawn = new Pawn();
         chessBoard.setUnitFromCell(6, 5, pawn);
 
-        Assertions.assertFalse(knight.isAbleToMove(4, 4, 6, 5));
+        Assertions.assertThrows(InvalidUserInputException.class, () -> knight.move(new Position(4, 4), new Position(6, 5)));
     }
 
     @Test
@@ -49,6 +51,6 @@ class KnightTest {
         Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(6, 5, pawn);
 
-        Assertions.assertTrue(knight.isAbleToMove(4, 4, 6, 5));
+//        Assertions.assertDoesNotThrow(() -> knight.move(new Position(4, 4), new Position(6, 5)));
     }
 }

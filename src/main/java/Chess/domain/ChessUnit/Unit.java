@@ -1,6 +1,8 @@
 package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
+import Chess.domain.Position;
+import Chess.exception.InvalidUserInputException;
 
 public abstract class Unit {
     UnitType type;
@@ -32,27 +34,21 @@ public abstract class Unit {
         return color;
     }
 
-    public void move(int fromR, int fromC, int toR, int toC) {
-        ChessBoard.getInstance().setUnitFromCell(toR, toC, this);
-        ChessBoard.getInstance().setUnitFromCell(fromR, fromC, new EmptyCell());
+    public void move(Position source, Position destination) {
+        validateIsAbleToMove(source, destination);
+
+        ChessBoard.getInstance().setUnitFromCell(source, this);
+        ChessBoard.getInstance().setUnitFromCell(destination, new EmptyCell());
     }
 
-    public abstract boolean isAbleToMove(int fromR, int fromC, int toR, int toC);
+    protected abstract void validateIsAbleToMove(Position source, Position destination) throws InvalidUserInputException;
 
-    protected boolean isExistTeammateOnDestination(int toR, int toC) {
-        Unit unit = ChessBoard.getInstance().getUnitFromCell(toR, toC);
+    protected boolean isExistTeammateOnDestination(Position position) {
+        Unit unit = ChessBoard.getInstance().getUnitFromCell(position);
         if (unit instanceof EmptyCell || color != unit.getColor()) {
             return false;
         }
 
         return true;
-    }
-
-    protected int getNextPositionToCheck(int from, int to) {
-        if (from < to) {
-            return from + 1;
-        }
-
-        return from - 1;
     }
 }

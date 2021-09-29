@@ -2,6 +2,7 @@ package Chess.controller;
 
 import Chess.domain.ChessBoard;
 import Chess.domain.Game;
+import Chess.domain.Position;
 import Chess.view.InputView;
 import Chess.view.OutputView;
 
@@ -52,12 +53,10 @@ public class GameController {
     }
 
     private void executeMoveCommand(List<String> args) {
-        int fromR = InputView.convertNumberInputCharToInt(args.get(0).charAt(1));
-        int fromC = InputView.convertLetterInputCharToInt(args.get(0).charAt(0));
-        int toR = InputView.convertNumberInputCharToInt(args.get(1).charAt(1));
-        int toC = InputView.convertLetterInputCharToInt(args.get(1).charAt(0));
+        Position source = new Position(args.get(0));
+        Position destination = new Position(args.get(0));
 
-        game.moveChessUnit(fromR, fromC, toR, toC);
+        game.moveChessUnit(source, destination);
         game.showChessBoard();
     }
 }

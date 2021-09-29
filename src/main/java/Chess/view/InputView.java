@@ -60,12 +60,4 @@ public class InputView {
             throw new InvalidUserInputException("위치 값에는 특수 문자가 들어갈 수 없습니다. (target 위치)");
         }
     }
-
-    public static int convertLetterInputCharToInt(char input) {
-        return input - 'a';
-    }
-
-    public static int convertNumberInputCharToInt(char input) {
-        return input - '0';
-    }
 }

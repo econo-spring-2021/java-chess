@@ -1,6 +1,8 @@
 package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
+import Chess.domain.Position;
+import Chess.exception.InvalidUserInputException;
 
 public class Queen extends Unit {
     public Queen() {
@@ -12,86 +14,83 @@ public class Queen extends Unit {
     }
 
     @Override
-    public boolean isAbleToMove(int fromR, int fromC, int toR, int toC) {
-        if (isExistTeammateOnDestination(toR, toC)) {
-            return false;
+    protected void validateIsAbleToMove(Position source, Position destination) {
+        if (isExistTeammateOnDestination(destination)) {
+            throw new InvalidUserInputException("해당 위치에는 팀원이 있습니다.");
         }
 
-        if (!isAbleMovement(fromR, fromC, toR, toC)) {
-            return false;
+        if (!isAbleMovement(source, destination)) {
+            throw new InvalidUserInputException("해당 위치는 움직일 수 없는 경로입니다.");
         }
 
-        if (isObstacleExistOnPath(fromR, fromC, toR, toC)) {
-            return false;
+        if (isObstacleExistOnPath(source, destination)) {
+            throw new InvalidUserInputException("경로에 장애물이 있습니다.");
         }
-
-        return true;
     }
 
-    private boolean isAbleMovement(int fromR, int fromC, int toR, int toC) {
-        return isAbleRookMovement(fromR, fromC, toR, toC) || isAbleBishopMovement(fromR, fromC, toR, toC);
+    private boolean isAbleMovement(Position source, Position destination) {
+        return isAbleRookMovement(source, destination) || isAbleBishopMovement(source, destination);
     }
 
-    private boolean isAbleRookMovement(int fromR, int fromC, int toR, int toC) {
-        if (fromR != toR && fromC != toC) {
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean isAbleBishopMovement(int fromR, int fromC, int toR, int toC) {
-        if (Math.abs(fromR - toR) != Math.abs(fromC - toC)) {
+    private boolean isAbleRookMovement(Position source, Position destination) {
+        if (source.getRow() != destination.getRow() && source.getCol() != destination.getCol()) {
             return false;
         }
 
         return true;
     }
 
-    private boolean isObstacleExistOnPath(int fromR, int fromC, int toR, int toC) {
-        return isObstacleExistOnRookPath(fromR, fromC, toR, toC) || isObstableExistOnBishopPath(fromR, fromC, toR, toC);
+    private boolean isAbleBishopMovement(Position source, Position destination) {
+        if (Math.abs(source.getRow() - destination.getRow()) != Math.abs(source.getCol() - destination.getCol())) {
+            return false;
+        }
+
+        return true;
     }
 
-    private boolean isObstacleExistOnRookPath(int fromR, int fromC, int toR, int toC) {
-        return isObstacleExistOnRowPath(fromR, toR, toC) || isObstacleExistOnColumnPath(fromC, toC, toR);
+    private boolean isObstacleExistOnPath(Position source, Position destination) {
+        return isObstacleExistOnRookPath(source, destination) || isExistObstacleOnDiagonalPath(source, destination);
     }
 
-    private boolean isObstacleExistOnRowPath(int fromR, int toR, int column) {
-        int row = getNextPositionToCheck(fromR, toR);
-        while (row != toR) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(row, column) instanceof EmptyCell)) {
+    private boolean isObstacleExistOnRookPath(Position source, Position destination) {
+        return isObstacleExistOnRowPath(source, destination) || isObstacleExistOnColumnPath(source, destination);
+    }
+
+    private boolean isObstacleExistOnRowPath(Position source, Position destination) {
+        Position position = new Position(source);
+        position.setNextRowToCheck(destination);
+
+        for (;position.getRow() != destination.getRow(); position.setNextRowToCheck(destination)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
                 return true;
             }
-
-            row = getNextPositionToCheck(row, toR);
         }
 
         return false;
     }
 
-    private boolean isObstacleExistOnColumnPath(int fromC, int toC, int row) {
-        int column = getNextPositionToCheck(fromC, toC);
-        while (column != toC) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(row, column) instanceof EmptyCell)) {
+    private boolean isObstacleExistOnColumnPath(Position source, Position destination) {
+        Position position = new Position(source);
+        position.setNextColToCheck(destination);
+
+        for (;position.getCol() != destination.getCol(); position.setNextColToCheck(destination)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
                 return true;
             }
-
-            column = getNextPositionToCheck(column, toC);
         }
 
         return false;
     }
 
-    private boolean isObstableExistOnBishopPath(int fromR, int fromC, int toR, int toC) {
-        int row = getNextPositionToCheck(fromR, toR);
-        int column = getNextPositionToCheck(fromC, toC);
-        while (row != toR && column != toC) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(row, column) instanceof EmptyCell)) {
+    private boolean isExistObstacleOnDiagonalPath(Position source, Position destination) {
+        Position position = new Position(source);
+        position.setNextRowToCheck(destination);
+        position.setNextColToCheck(destination);
+
+        for (; position.getRow() != destination.getRow(); position.setNextRowToCheck(destination), position.setNextColToCheck(destination)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
                 return true;
             }
-
-            row = getNextPositionToCheck(row, toR);
-            column = getNextPositionToCheck(column, toC);
         }
 
         return false;
