@@ -2,7 +2,8 @@ package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
 import Chess.domain.Position;
-import Chess.exception.InvalidUserInputException;
+import Chess.exception.InvalidPositionException;
+import Chess.exception.InvalidPositionException;
 
 public class Pawn extends Unit {
     private boolean isFirstMovement = true;
@@ -25,27 +26,27 @@ public class Pawn extends Unit {
     }
 
     @Override
-    protected void validateIsAbleToMove(Position source, Position destination) throws InvalidUserInputException {
+    protected void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException {
         if (isExistTeammateOnDestination(destination)) {
-            throw new InvalidUserInputException("해당 위치에는 팀원이 있습니다.");
+            throw new InvalidPositionException(InvalidPositionException.TEAMMATE_ON_DESTINATION);
         }
 
         if (!isRightDirectionMove(source, destination)) {
-            throw new InvalidUserInputException("잘못된 방향의 경로입니다.");
+            throw new InvalidPositionException(InvalidPositionException.WRONG_DIRECTION_PATH);
         }
 
         Unit targetUnit = ChessBoard.getInstance().getUnitFromCell(destination);
         if (isAbleAttackMove(source, destination) && targetUnit.getType() == UnitType.EMPTY) {
-            throw new InvalidUserInputException("해당 위치는 움직일 수 없는 경로입니다.");
+            throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
         }
 
         if (isFirstMove(source, destination)) {
             if (!isFirstMovement) {
-                throw new InvalidUserInputException("해당 위치는 움직일 수 없는 경로입니다.");
+                throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
             }
         } else {
             if (!isAbleMovement(source, destination)) {
-                throw new InvalidUserInputException("해당 위치는 움직일 수 없는 경로입니다.");
+                throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
             }
         }
     }

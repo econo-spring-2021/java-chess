@@ -2,7 +2,7 @@ package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
 import Chess.domain.Position;
-import Chess.exception.InvalidUserInputException;
+import Chess.exception.InvalidPositionException;
 
 public class Queen extends Unit {
     public Queen() {
@@ -14,17 +14,17 @@ public class Queen extends Unit {
     }
 
     @Override
-    protected void validateIsAbleToMove(Position source, Position destination) throws InvalidUserInputException {
+    protected void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException {
         if (isExistTeammateOnDestination(destination)) {
-            throw new InvalidUserInputException("해당 위치에는 팀원이 있습니다.");
+            throw new InvalidPositionException(InvalidPositionException.TEAMMATE_ON_DESTINATION);
         }
 
         if (!isAbleMovement(source, destination)) {
-            throw new InvalidUserInputException("해당 위치는 움직일 수 없는 경로입니다.");
+            throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
         }
 
         if (isObstacleExistOnPath(source, destination)) {
-            throw new InvalidUserInputException("경로에 장애물이 있습니다.");
+            throw new InvalidPositionException(InvalidPositionException.OBSTACLE_IN_PATH);
         }
     }
 

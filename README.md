@@ -32,5 +32,5 @@
 * [x] 명명된 이름들 간소화
 * [x] 체스말 위치&이동에 대한 정보와 관렴 함수들 클래스화 (Position.java)
 * [x] 게임 로직 코드에서의 Position 클래스와 관련된 예외 처리
-* [ ] Exception 추가 및 처리
+* [x] Exception 추가 및 처리
 * [ ] 체스말의 interface 리팩토링과 MovableStrategy interface 도입
