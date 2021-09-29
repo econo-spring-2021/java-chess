@@ -34,11 +34,11 @@ public abstract class Unit {
         return color;
     }
 
-    public void move(Position source, Position destination) {
+    public void move(Position source, Position destination) throws InvalidUserInputException {
         validateIsAbleToMove(source, destination);
 
-        ChessBoard.getInstance().setUnitFromCell(source, this);
-        ChessBoard.getInstance().setUnitFromCell(destination, new EmptyCell());
+        ChessBoard.getInstance().setUnitFromCell(destination, this);
+        ChessBoard.getInstance().setUnitFromCell(source, new EmptyCell());
     }
 
     protected abstract void validateIsAbleToMove(Position source, Position destination) throws InvalidUserInputException;

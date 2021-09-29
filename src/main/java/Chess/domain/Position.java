@@ -1,6 +1,7 @@
 package Chess.domain;
 
 import Chess.exception.InvalidUserInputException;
+import Chess.view.OutputView;
 
 public class Position {
 
@@ -8,12 +9,16 @@ public class Position {
     private int col;
 
     public Position(String pos) throws InvalidUserInputException {
-        this.row = convertCharRowToIntRow(pos.charAt(1));
-        this.col = convertCharColToIntCol(pos.charAt(0));
+        try {
+            this.row = convertCharRowToIntRow(pos.charAt(1));
+            this.col = convertCharColToIntCol(pos.charAt(0));
 
-        validatePositionRange();
+            validatePositionRange();
 
-        this.row = convertInputRowToDataRow(this.row);
+            this.row = convertInputRowToDataRow(this.row);
+        } catch (InvalidUserInputException e) {
+            OutputView.printException(e);
+        }
     }
 
     public Position(int row, int col) {
@@ -43,7 +48,7 @@ public class Position {
             throw new InvalidUserInputException("올바르지 않은 범위의 행 값입니다.");
         }
 
-        if (col < 0 || col >= ChessBoard.CHESSBOARD_ROW) {
+        if (col < 0 || col >= ChessBoard.CHESSBOARD_COLUMN) {
             throw new InvalidUserInputException("올바르지 않은 범위의 열 값입니다.");
         }
     }

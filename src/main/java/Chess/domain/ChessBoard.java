@@ -72,16 +72,16 @@ public class ChessBoard {
     public Unit getUnitFromCell(int r, int c) throws IndexOutOfBoundsException {
         return chessBoard[r][c];
     }
-    public Unit getUnitFromCell(Position pos) throws IndexOutOfBoundsException {
-        return chessBoard[pos.getRow()][pos.getCol()];
+    public Unit getUnitFromCell(Position position) throws IndexOutOfBoundsException {
+        return chessBoard[position.getRow()][position.getCol()];
     }
 
     public void setUnitFromCell(int r, int c, Unit unit) throws IndexOutOfBoundsException {
         chessBoard[r][c] = unit;
     }
 
-    public void setUnitFromCell(Position pos, Unit unit) throws IndexOutOfBoundsException {
-        chessBoard[pos.getRow()][pos.getCol()] = unit;
+    public void setUnitFromCell(Position position, Unit unit) throws IndexOutOfBoundsException {
+        chessBoard[position.getRow()][position.getCol()] = unit;
     }
 
     public String convertChessBoardToString() {

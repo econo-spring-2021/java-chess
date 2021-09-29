@@ -45,6 +45,10 @@ public class InputView {
             throw new InvalidUserInputException("알맞은 갯수의 명령어를 입력하세요.");
         }
 
+        if (commands.get(1).length() > 2 || commands.get(2).length() > 2) {
+            throw new InvalidUserInputException("올바르지 않은 위치 값입니다.");
+        }
+
         if (commands.get(1).equals(2)) {
             throw new InvalidUserInputException("같은 위치로 움직일 수 없습니다.");
         }

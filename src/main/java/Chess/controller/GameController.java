@@ -3,6 +3,7 @@ package Chess.controller;
 import Chess.domain.ChessBoard;
 import Chess.domain.Game;
 import Chess.domain.Position;
+import Chess.exception.InvalidUserInputException;
 import Chess.view.InputView;
 import Chess.view.OutputView;
 
@@ -53,8 +54,13 @@ public class GameController {
     }
 
     private void executeMoveCommand(List<String> args) {
+        if (!game.isGameStarted()) {
+            OutputView.printException(new InvalidUserInputException("게임 시작 전에 체스말을 움직일 수 없습니다"));
+            return;
+        }
+
         Position source = new Position(args.get(0));
-        Position destination = new Position(args.get(0));
+        Position destination = new Position(args.get(1));
 
         game.moveChessUnit(source, destination);
         game.showChessBoard();

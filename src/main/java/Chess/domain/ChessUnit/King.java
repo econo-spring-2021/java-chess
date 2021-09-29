@@ -13,7 +13,7 @@ public class King extends Unit {
     }
 
     @Override
-    protected void validateIsAbleToMove(Position source, Position destination) {
+    protected void validateIsAbleToMove(Position source, Position destination) throws InvalidUserInputException {
         if (isExistTeammateOnDestination(destination)) {
             throw new InvalidUserInputException("해당 위치에는 팀원이 있습니다.");
         }
