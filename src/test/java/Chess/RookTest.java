@@ -1,7 +1,7 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
-import Chess.domain.ChessUnit.ChessUnitColor;
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.Pawn;
 import Chess.domain.ChessUnit.Rook;
 import org.junit.jupiter.api.Assertions;
@@ -62,7 +62,7 @@ class RookTest {
     void test_rook_isAbleToMove_enemyOnDestination() {
         Rook rook = new Rook();
         chessBoard.setUnitFromCell(0, 0, rook);
-        Pawn pawn = new Pawn(ChessUnitColor.BLACK);
+        Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(5, 0, pawn);
 
         Assertions.assertTrue(rook.isAbleToMove(0, 0, 5, 0));

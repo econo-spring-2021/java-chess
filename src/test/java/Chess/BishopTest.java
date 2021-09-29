@@ -2,9 +2,8 @@ package Chess;
 
 import Chess.domain.ChessBoard;
 import Chess.domain.ChessUnit.Bishop;
-import Chess.domain.ChessUnit.ChessUnitColor;
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.Pawn;
-import Chess.domain.ChessUnit.Rook;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -60,7 +59,7 @@ class BishopTest {
     void test_bishop_isAbleToMove_enemyOnDestination() {
         Bishop bishop = new Bishop();
         chessBoard.setUnitFromCell(0, 0, bishop);
-        Pawn pawn = new Pawn(ChessUnitColor.BLACK);
+        Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(5, 5, pawn);
 
         Assertions.assertTrue(bishop.isAbleToMove(0, 0, 5, 5));

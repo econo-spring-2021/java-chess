@@ -46,7 +46,7 @@ class KnightTest {
     void test_knight_isAbleToMove_enemyOnDestination() {
         Knight knight = new Knight();
         chessBoard.setUnitFromCell(4, 4, knight);
-        Pawn pawn = new Pawn(ChessUnitColor.BLACK);
+        Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(6, 5, pawn);
 
         Assertions.assertTrue(knight.isAbleToMove(4, 4, 6, 5));

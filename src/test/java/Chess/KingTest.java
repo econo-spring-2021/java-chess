@@ -1,7 +1,7 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
-import Chess.domain.ChessUnit.ChessUnitColor;
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.King;
 import Chess.domain.ChessUnit.Knight;
 import Chess.domain.ChessUnit.Pawn;
@@ -49,7 +49,7 @@ public class KingTest {
     void test_king_isAbleToMove_enemyOnDestination() {
         King king = new King();
         chessBoard.setUnitFromCell(0, 0, king);
-        Pawn pawn = new Pawn(ChessUnitColor.BLACK);
+        Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(1, 1, pawn);
 
         Assertions.assertTrue(king.isAbleToMove(0, 0, 1, 1));

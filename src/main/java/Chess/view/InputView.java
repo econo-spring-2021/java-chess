@@ -1,5 +1,7 @@
 package Chess.view;
 
+import Chess.exception.InvalidUserInputException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

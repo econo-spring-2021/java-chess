@@ -2,33 +2,33 @@ package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
 
-public abstract class ChessUnit {
-    ChessUnitType type;
-    ChessUnitColor color;
+public abstract class Unit {
+    UnitType type;
+    UnitColor color;
 
-    public ChessUnit(ChessUnitType type) {
+    public Unit(UnitType type) {
         this.type = type;
-        this.color = ChessUnitColor.WHITE;
+        this.color = UnitColor.WHITE;
     }
 
-    public ChessUnit(ChessUnitType type, ChessUnitColor color) {
+    public Unit(UnitType type, UnitColor color) {
         this.type = type;
         this.color = color;
     }
 
-    public ChessUnitType getType() {
+    public UnitType getType() {
         return type;
     }
 
     public String getTypeSymbol() {
-        if (color == ChessUnitColor.WHITE) {
+        if (color == UnitColor.WHITE) {
             return type.getWhiteSymbol();
         }
 
         return type.getBlackSymbol();
     }
 
-    public ChessUnitColor getColor() {
+    public UnitColor getColor() {
         return color;
     }
 
@@ -40,7 +40,7 @@ public abstract class ChessUnit {
     public abstract boolean isAbleToMove(int fromR, int fromC, int toR, int toC);
 
     protected boolean isExistTeammateOnDestination(int toR, int toC) {
-        ChessUnit unit = ChessBoard.getInstance().getUnitFromCell(toR, toC);
+        Unit unit = ChessBoard.getInstance().getUnitFromCell(toR, toC);
         if (unit instanceof EmptyCell || color != unit.getColor()) {
             return false;
         }

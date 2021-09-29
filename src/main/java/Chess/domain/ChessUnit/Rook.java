@@ -2,13 +2,13 @@ package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
 
-public class Rook extends ChessUnit {
+public class Rook extends Unit {
     public Rook() {
-        super(ChessUnitType.ROOK);
+        super(UnitType.ROOK);
     }
 
-    public Rook(ChessUnitColor color) {
-        super(ChessUnitType.ROOK, color);
+    public Rook(UnitColor color) {
+        super(UnitType.ROOK, color);
     }
 
     @Override

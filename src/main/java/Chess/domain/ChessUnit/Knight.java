@@ -1,12 +1,12 @@
 package Chess.domain.ChessUnit;
 
-public class Knight extends ChessUnit {
+public class Knight extends Unit {
     public Knight() {
-        super(ChessUnitType.KNIGHT);
+        super(UnitType.KNIGHT);
     }
 
-    public Knight(ChessUnitColor color) {
-        super(ChessUnitType.KNIGHT, color);
+    public Knight(UnitColor color) {
+        super(UnitType.KNIGHT, color);
     }
 
     @Override

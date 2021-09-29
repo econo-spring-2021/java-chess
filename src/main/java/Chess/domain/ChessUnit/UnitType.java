@@ -1,6 +1,6 @@
 package Chess.domain.ChessUnit;
 
-public enum ChessUnitType {
+public enum UnitType {
     KING("k"),
     QUEEN("q"),
     ROOK("r"),
@@ -11,7 +11,7 @@ public enum ChessUnitType {
 
     private String type;
 
-    ChessUnitType(String type) {
+    UnitType(String type) {
         this.type = type;
     }
 

@@ -1,8 +1,8 @@
 package Chess.domain.ChessUnit;
 
-public class EmptyCell extends ChessUnit {
+public class EmptyCell extends Unit {
     public EmptyCell() {
-        super(ChessUnitType.EMPTY, ChessUnitColor.WHITE);
+        super(UnitType.EMPTY, UnitColor.WHITE);
     }
 
     @Override

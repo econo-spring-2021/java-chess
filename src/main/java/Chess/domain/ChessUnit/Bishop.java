@@ -2,13 +2,13 @@ package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
 
-public class Bishop extends ChessUnit {
+public class Bishop extends Unit {
     public Bishop() {
-        super(ChessUnitType.BISHOP);
+        super(UnitType.BISHOP);
     }
 
-    public Bishop(ChessUnitColor color) {
-        super(ChessUnitType.BISHOP, color);
+    public Bishop(UnitColor color) {
+        super(UnitType.BISHOP, color);
     }
 
     @Override

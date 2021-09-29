@@ -1,6 +1,6 @@
 package Chess.domain;
 
-import Chess.domain.ChessUnit.ChessUnit;
+import Chess.domain.ChessUnit.Unit;
 import Chess.domain.ChessUnit.EmptyCell;
 import Chess.view.OutputView;
 
@@ -31,7 +31,7 @@ public class Game {
             fromR = ChessBoard.convertInputRowToDataRow(fromR);
             toR = ChessBoard.convertInputRowToDataRow(toR);
 
-            ChessUnit unit = chessBoard.getUnitFromCell(fromR, fromC);
+            Unit unit = chessBoard.getUnitFromCell(fromR, fromC);
             if (unit instanceof EmptyCell) {
                 throw new IllegalArgumentException("그 곳에는 움직일 체스말이 없습니다.");
             }

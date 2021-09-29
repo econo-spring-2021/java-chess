@@ -2,15 +2,15 @@ package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
 
-public class Pawn extends ChessUnit {
+public class Pawn extends Unit {
     private boolean isFirstMovement = true;
 
     public Pawn() {
-        super(ChessUnitType.PAWN);
+        super(UnitType.PAWN);
     }
 
-    public Pawn(ChessUnitColor color) {
-        super(ChessUnitType.PAWN, color);
+    public Pawn(UnitColor color) {
+        super(UnitType.PAWN, color);
     }
 
     @Override
@@ -32,8 +32,8 @@ public class Pawn extends ChessUnit {
             return false;
         }
 
-        ChessUnit targetUnit = ChessBoard.getInstance().getUnitFromCell(toR, toC);
-        if (targetUnit.getType() != ChessUnitType.EMPTY && isAbleAttackMove(fromR, fromC, toR, toC)) {
+        Unit targetUnit = ChessBoard.getInstance().getUnitFromCell(toR, toC);
+        if (targetUnit.getType() != UnitType.EMPTY && isAbleAttackMove(fromR, fromC, toR, toC)) {
             return true;
         }
 
@@ -53,11 +53,11 @@ public class Pawn extends ChessUnit {
     }
 
     private boolean isRightDirectionMove(int fromR, int toR) {
-        if (color == ChessUnitColor.WHITE && fromR - toR < 0) {
+        if (color == UnitColor.WHITE && fromR - toR < 0) {
             return false;
         }
 
-        if (color == ChessUnitColor.BLACK && fromR - toR > 0) {
+        if (color == UnitColor.BLACK && fromR - toR > 0) {
             return false;
         }
 

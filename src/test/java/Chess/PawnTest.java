@@ -1,7 +1,7 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
-import Chess.domain.ChessUnit.ChessUnitColor;
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.Pawn;
 import Chess.domain.ChessUnit.Rook;
 import org.junit.jupiter.api.Assertions;
@@ -86,7 +86,7 @@ class PawnTest {
     @DisplayName("폰이 적을 잡을 때 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
     void test_pawn_isAbleToMove_possibleAttackMovement() {
         Pawn pawn = new Pawn();
-        ChessBoard.getInstance().setUnitFromCell(4, 4, new Pawn(ChessUnitColor.BLACK));
+        ChessBoard.getInstance().setUnitFromCell(4, 4, new Pawn(UnitColor.BLACK));
 
         Assertions.assertTrue(pawn.isAbleToMove(5, 5, 4, 4));
     }
@@ -95,7 +95,7 @@ class PawnTest {
     @DisplayName("폰이 적을 잡을 때 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
     void test_pawn_isAbleToMove_impossibleAttackMovement() {
         Pawn pawn = new Pawn();
-        ChessBoard.getInstance().setUnitFromCell(5, 5, new Pawn(ChessUnitColor.BLACK));
+        ChessBoard.getInstance().setUnitFromCell(5, 5, new Pawn(UnitColor.BLACK));
 
         Assertions.assertFalse(pawn.isAbleToMove(4, 5, 5, 5));
     }

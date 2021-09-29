@@ -2,13 +2,13 @@ package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
 
-public class Queen extends ChessUnit {
+public class Queen extends Unit {
     public Queen() {
-        super(ChessUnitType.QUEEN);
+        super(UnitType.QUEEN);
     }
 
-    public Queen(ChessUnitColor color) {
-        super(ChessUnitType.QUEEN, color);
+    public Queen(UnitColor color) {
+        super(UnitType.QUEEN, color);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class ChessBoard {
     public static final int WHITE_PAWN_CHESS_INIT_ROW = ChessBoard.CHESSBOARD_ROW - 2;
     public static final int BLACK_PAWN_CHESS_UNIT_ROW = 1;
     public static final int BLACK_SPECIAL_CHESS_UNIT_ROW = 0;
-    public static final List<Class<? extends ChessUnit>> INITIAL_SPECIAL_CHESS_UNIT_POSITION = Arrays.asList(
+    public static final List<Class<? extends Unit>> INITIAL_SPECIAL_CHESS_UNIT_POSITION = Arrays.asList(
             Rook.class,
             Knight.class,
             Bishop.class,
@@ -29,7 +29,7 @@ public class ChessBoard {
         return instance;
     }
 
-    private ChessUnit[][] chessBoard = new ChessUnit[CHESSBOARD_ROW][CHESSBOARD_COLUMN];
+    private Unit[][] chessBoard = new Unit[CHESSBOARD_ROW][CHESSBOARD_COLUMN];
 
     private ChessBoard() {
         initializeChessGame();
@@ -58,10 +58,10 @@ public class ChessBoard {
 
     private void initializeChessUnit() throws Exception {
         for (int i = 0; i < CHESSBOARD_COLUMN; i++) {
-            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(ChessUnitColor.class).newInstance(ChessUnitColor.BLACK));
-            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new Pawn(ChessUnitColor.BLACK));
-            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(ChessUnitColor.class).newInstance(ChessUnitColor.WHITE));
-            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new Pawn(ChessUnitColor.WHITE));
+            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(UnitColor.class).newInstance(UnitColor.BLACK));
+            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new Pawn(UnitColor.BLACK));
+            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(UnitColor.class).newInstance(UnitColor.WHITE));
+            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new Pawn(UnitColor.WHITE));
         }
     }
 
@@ -73,18 +73,18 @@ public class ChessBoard {
         }
     }
 
-    public ChessUnit getUnitFromCell(int r, int c) throws IndexOutOfBoundsException {
+    public Unit getUnitFromCell(int r, int c) throws IndexOutOfBoundsException {
         return chessBoard[r][c];
     }
 
-    public void setUnitFromCell(int r, int c, ChessUnit unit) throws IndexOutOfBoundsException {
+    public void setUnitFromCell(int r, int c, Unit unit) throws IndexOutOfBoundsException {
         chessBoard[r][c] = unit;
     }
 
     public String convertChessBoardToString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (ChessUnit[] row : chessBoard) {
-            for (ChessUnit unit : row) {
+        for (Unit[] row : chessBoard) {
+            for (Unit unit : row) {
                 stringBuilder.append(unit.getTypeSymbol());
             }
             stringBuilder.append('\n');

@@ -1,7 +1,7 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
-import Chess.domain.ChessUnit.ChessUnit;
+import Chess.domain.ChessUnit.Unit;
 import Chess.domain.ChessUnit.Rook;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +30,7 @@ class ChessBoardTest {
     @Test
     @DisplayName("올바르게 체스말을 조회하는지")
     void test_getUnitFromCell() {
-        ChessUnit testUnit = new Rook();
+        Unit testUnit = new Rook();
         chessBoard.setUnitFromCell(0, 0, testUnit);
         Assertions.assertEquals(testUnit, chessBoard.getUnitFromCell(0, 0));
     }

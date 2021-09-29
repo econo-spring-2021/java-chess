@@ -1,10 +1,9 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
-import Chess.domain.ChessUnit.ChessUnitColor;
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.Pawn;
 import Chess.domain.ChessUnit.Queen;
-import Chess.domain.ChessUnit.Rook;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -67,7 +66,7 @@ class QueenTest {
     void test_queen_isAbleToMove_enemyOnDestination() {
         Queen queen = new Queen();
         chessBoard.setUnitFromCell(0, 0, queen);
-        Pawn pawn = new Pawn(ChessUnitColor.BLACK);
+        Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(5, 5, pawn);
 
         Assertions.assertTrue(queen.isAbleToMove(0, 0, 5, 5));
