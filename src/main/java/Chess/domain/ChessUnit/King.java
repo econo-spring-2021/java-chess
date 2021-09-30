@@ -24,7 +24,7 @@ public class King extends Unit {
     }
 
     private boolean isAbleMovement(Position source, Position destination) {
-        if (Math.abs(source.getRow()) - destination.getRow() != 1 || Math.abs(source.getCol() - destination.getCol()) != 1) {
+        if (Math.abs(source.getRow() - destination.getRow()) != 1 || Math.abs(source.getCol() - destination.getCol()) != 1) {
             return false;
         }
 

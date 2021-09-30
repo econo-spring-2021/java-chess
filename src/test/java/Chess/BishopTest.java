@@ -5,7 +5,7 @@ import Chess.domain.ChessUnit.Bishop;
 import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.Pawn;
 import Chess.domain.Position;
-import Chess.exception.InvalidUserInputException;
+import Chess.exception.InvalidPositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,14 +23,14 @@ class BishopTest {
     @DisplayName("비숍이 움직일 수 있는 움직임에 대한 이동가능 여부를 올바르게 판단하는가")
     void test_bishop_isAbleToMove_possibleMovement() {
         Bishop bishop = new Bishop();
-//        Assertions.assertDoesNotThrow(() -> bishop.move(new Position(2, 2), new Position(7, 7)));
+        Assertions.assertDoesNotThrow(() -> bishop.move(new Position(2, 2), new Position(7, 7)));
     }
 
     @Test
     @DisplayName("비숍이 움직일 수 없는 움직임에 대한 이동가능 여부를 올바르게 판단하는가")
     void test_bishop_isAbleToMove_impossibleMovement() {
         Bishop bishop = new Bishop();
-        Assertions.assertThrows(InvalidUserInputException.class, () -> bishop.move(new Position(2, 2), new Position(2, 7)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> bishop.move(new Position(2, 2), new Position(2, 7)));
     }
 
     @Test
@@ -41,7 +41,7 @@ class BishopTest {
         Pawn pawn = new Pawn();
         chessBoard.setUnitFromCell(1, 1, pawn);
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> bishop.move(new Position(0, 0), new Position(5, 5)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> bishop.move(new Position(0, 0), new Position(5, 5)));
     }
 
 
@@ -53,7 +53,7 @@ class BishopTest {
         Pawn pawn = new Pawn();
         chessBoard.setUnitFromCell(5, 5, pawn);
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> bishop.move(new Position(0, 0), new Position(5, 5)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> bishop.move(new Position(0, 0), new Position(5, 5)));
     }
 
     @Test
@@ -64,6 +64,6 @@ class BishopTest {
         Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(5, 5, pawn);
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> bishop.move(new Position(0, 0), new Position(5, 5)));
+        Assertions.assertDoesNotThrow(() -> bishop.move(new Position(0, 0), new Position(5, 5)));
     }
 }

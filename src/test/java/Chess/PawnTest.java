@@ -5,8 +5,7 @@ import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.Pawn;
 import Chess.domain.ChessUnit.Rook;
 import Chess.domain.Position;
-//import org.junit.jupiter.api.Assertions;
-import Chess.exception.InvalidUserInputException;
+import Chess.exception.InvalidPositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +14,7 @@ import org.junit.jupiter.api.Test;
 class PawnTest {
 
     ChessBoard chessBoard = ChessBoard.getInstance();
+
     @BeforeEach
     void initChessBoard() {
         chessBoard.resetChessUnitOnChessBoard();
@@ -25,7 +25,7 @@ class PawnTest {
     void test_pawn_isAbleToMove_impossibleOppositeMovement() {
         Pawn pawn = new Pawn();
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> pawn.move(new Position(5, 5), new Position(6, 5)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> pawn.move(new Position(5, 5), new Position(6, 5)));
     }
 
     @Test
@@ -33,7 +33,7 @@ class PawnTest {
     void test_pawn_isAbleToMove_possibleFirstMovement() {
         Pawn pawn = new Pawn();
 
-        //        Assertions.assertDoesNotThrow(() -> pawn.move(new Position(4, 4), new Position(2, 4)));
+        Assertions.assertDoesNotThrow(() -> pawn.move(new Position(4, 4), new Position(2, 4)));
     }
 
     @Test
@@ -41,7 +41,7 @@ class PawnTest {
     void test_pawn_isAbleToMove_impossibleFirstMovement() {
         Pawn pawn = new Pawn();
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> pawn.move(new Position(4, 4), new Position(1, 4)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> pawn.move(new Position(4, 4), new Position(1, 4)));
     }
 
     @Test
@@ -50,7 +50,7 @@ class PawnTest {
         Pawn pawn = new Pawn();
 
         pawn.move(new Position(6, 6), new Position(4, 6));
-        //        Assertions.assertDoesNotThrow(() -> pawn.move(new Position(4, 6), new Position(3, 6)));
+        Assertions.assertDoesNotThrow(() -> pawn.move(new Position(4, 6), new Position(3, 6)));
     }
 
     @Test
@@ -59,8 +59,7 @@ class PawnTest {
         Pawn pawn = new Pawn();
 
         pawn.move(new Position(6, 6), new Position(4, 6));
-        Assertions.assertThrows(InvalidUserInputException.class, () -> pawn.move(new Position(4, 6), new Position(2, 6)));
-//        Assertions.assertFalse(pawn.isAbleToMove(4, 6, 2, 6));
+        Assertions.assertThrows(InvalidPositionException.class, () -> pawn.move(new Position(4, 6), new Position(2, 6)));
     }
 
     @Test
@@ -71,7 +70,7 @@ class PawnTest {
         Rook rook = new Rook();
         chessBoard.setUnitFromCell(0, 0, rook);
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> pawn.move(new Position(2, 0), new Position(0, 0)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> pawn.move(new Position(2, 0), new Position(0, 0)));
     }
 
     @Test
@@ -82,8 +81,8 @@ class PawnTest {
         Rook rook = new Rook();
         chessBoard.setUnitFromCell(1, 0, rook);
 
-        pawn.move(new Position(4,0), new Position(2, 0));
-        Assertions.assertThrows(InvalidUserInputException.class, () -> pawn.move(new Position(2, 0), new Position(1, 0)));
+        pawn.move(new Position(4, 0), new Position(2, 0));
+        Assertions.assertThrows(InvalidPositionException.class, () -> pawn.move(new Position(2, 0), new Position(1, 0)));
     }
 
     @Test
@@ -92,7 +91,7 @@ class PawnTest {
         Pawn pawn = new Pawn();
         ChessBoard.getInstance().setUnitFromCell(4, 4, new Pawn(UnitColor.BLACK));
 
-        //        Assertions.assertDoesNotThrow(() -> pawn.move(new Position(5, 5), new Position(4, 4)));
+        Assertions.assertDoesNotThrow(() -> pawn.move(new Position(5, 5), new Position(4, 4)));
     }
 
     @Test
@@ -101,6 +100,6 @@ class PawnTest {
         Pawn pawn = new Pawn();
         ChessBoard.getInstance().setUnitFromCell(5, 5, new Pawn(UnitColor.BLACK));
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> pawn.move(new Position(4, 5), new Position(5, 5)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> pawn.move(new Position(4, 5), new Position(5, 5)));
     }
 }

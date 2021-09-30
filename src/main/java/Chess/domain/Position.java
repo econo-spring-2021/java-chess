@@ -62,16 +62,18 @@ public class Position {
     }
 
     public void setNextRowToCheck(Position destination) {
-        if (row < destination.getRow()) {
+        if (row <= destination.getRow()) {
             row++;
+            return;
         }
 
         row--;
     }
 
     public void setNextColToCheck(Position destination) {
-        if (col < destination.getCol()) {
+        if (col <= destination.getCol()) {
             col++;
+            return;
         }
 
         col--;

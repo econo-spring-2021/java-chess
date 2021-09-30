@@ -5,7 +5,7 @@ import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.Pawn;
 import Chess.domain.ChessUnit.Rook;
 import Chess.domain.Position;
-import Chess.exception.InvalidUserInputException;
+import Chess.exception.InvalidPositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 class RookTest {
 
     ChessBoard chessBoard = ChessBoard.getInstance();
+
     @BeforeEach
     void initChessBoard() {
         chessBoard.resetChessUnitOnChessBoard();
@@ -25,7 +26,7 @@ class RookTest {
         Rook rook = new Rook();
         chessBoard.setUnitFromCell(0, 0, rook);
 
-        //        Assertions.assertDoesNotThrow(() -> rook.move(new Position(0, 0), new Position(0, 5));
+        Assertions.assertDoesNotThrow(() -> rook.move(new Position(0, 0), new Position(0, 5)));
     }
 
     @Test
@@ -34,7 +35,7 @@ class RookTest {
         Rook rook = new Rook();
         chessBoard.setUnitFromCell(0, 0, rook);
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> rook.move(new Position(0, 0), new Position(2, 2)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> rook.move(new Position(0, 0), new Position(2, 2)));
     }
 
     @Test
@@ -45,7 +46,7 @@ class RookTest {
         Pawn pawn = new Pawn();
         chessBoard.setUnitFromCell(1, 0, pawn);
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> rook.move(new Position(0, 0), new Position(5, 0)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> rook.move(new Position(0, 0), new Position(5, 0)));
     }
 
     @Test
@@ -56,7 +57,7 @@ class RookTest {
         Pawn pawn = new Pawn();
         chessBoard.setUnitFromCell(5, 0, pawn);
 
-        Assertions.assertThrows(InvalidUserInputException.class, () -> rook.move(new Position(0, 0), new Position(5, 0)));
+        Assertions.assertThrows(InvalidPositionException.class, () -> rook.move(new Position(0, 0), new Position(5, 0)));
     }
 
     @Test
@@ -67,6 +68,6 @@ class RookTest {
         Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(5, 0, pawn);
 
-        //        Assertions.assertDoesNotThrow(() -> rook.move(new Position(0, 0), new Position(5, 0));
+        Assertions.assertDoesNotThrow(() -> rook.move(new Position(0, 0), new Position(5, 0)));
     }
 }
