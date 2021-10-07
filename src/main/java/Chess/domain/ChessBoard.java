@@ -95,4 +95,28 @@ public class ChessBoard {
 
         return stringBuilder.toString();
     }
+
+    public Boolean isWhiteKingAlive() {
+        for (Unit[] row : chessBoard) {
+            for (Unit unit : row) {
+                if (unit.getType().equals(UnitType.KING) && unit.getColor().equals(UnitColor.WHITE)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isBlackKingAlive() {
+        for (Unit[] row : chessBoard) {
+            for (Unit unit : row) {
+                if (unit.getType().equals(UnitType.KING) && unit.getColor().equals(UnitColor.BLACK)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

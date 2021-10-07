@@ -36,8 +36,9 @@
 * [ ] 체스말의 interface 리팩토링과 MovableStrategy interface 도입
 
 # 3 step features
-* [ ] King이 죽으면 게임 종료 
+* [x] King이 죽으면 게임 종료 
 * [ ] status 명령어 구
   * [ ] test case
   * [ ] input, output
-  * [ ] feature
+  * [ ] 점수 판별 구현
+  * [ ] 승패 판별 구현

@@ -34,6 +34,11 @@ public class GameController {
                 args = commands.subList(1, commands.size());
             }
             executeCommand(command, args);
+
+            if (!game.checkIsKingAlive()) {
+                game.endGame();
+                return;
+            }
         }
     }
 

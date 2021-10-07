@@ -17,6 +17,18 @@ public class Game {
         chessBoard.initializeChessGame();
     }
 
+    public void endGame() {
+        isStarted = false;
+    }
+
+    public boolean checkIsKingAlive() {
+        if (chessBoard.isWhiteKingAlive() && chessBoard.isBlackKingAlive()) {
+            return true;
+        }
+
+        return false;
+    }
+
     public void showChessBoard() {
         String chessBoardStr = chessBoard.convertChessBoardToString();
         OutputView.printString(chessBoardStr);

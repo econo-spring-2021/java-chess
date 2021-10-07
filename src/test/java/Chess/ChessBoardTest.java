@@ -1,20 +1,23 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
+import Chess.domain.ChessUnit.EmptyCell;
 import Chess.domain.ChessUnit.Unit;
 import Chess.domain.ChessUnit.Rook;
 import Chess.domain.ChessUnit.UnitType;
+import Chess.domain.Game;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ChessBoardTest {
+    Game game = new Game();
     ChessBoard chessBoard = ChessBoard.getInstance();
 
     @BeforeEach
     void initializeChessBoard() {
-        chessBoard.initializeChessGame();
+        game.initializeGame();
     }
 
     @Test
@@ -48,5 +51,25 @@ class ChessBoardTest {
     void test_setUnitFromCell_IndexOutOfBoundsException() {
         Assertions.assertThrows(IndexOutOfBoundsException.class,
                 () -> chessBoard.setUnitFromCell(ChessBoard.CHESSBOARD_ROW + 1, ChessBoard.CHESSBOARD_COLUMN + 1, new Rook()));
+    }
+
+    @Test
+    @DisplayName("양 팀의 킹이 살아 있을 때, 올바르게 판단하는지")
+    void test_checkIsKingAlice() {
+        Assertions.assertTrue(game.checkIsKingAlive());
+    }
+
+    @Test
+    @DisplayName("백팀의 킹만 살아 있을 때, 올바르게 판단하는지")
+    void test_checkIsWhiteKingAlice() {
+        chessBoard.setUnitFromCell(7, 4, new EmptyCell());
+        Assertions.assertFalse(chessBoard.isWhiteKingAlive());
+    }
+
+    @Test
+    @DisplayName("흑팀의 킹만 살아 있을 때, 올바르게 판단하는지")
+    void test_checkIsBlackKingAlice() {
+        chessBoard.setUnitFromCell(0, 4, new EmptyCell());
+        Assertions.assertFalse(chessBoard.isBlackKingAlive());
     }
 }
