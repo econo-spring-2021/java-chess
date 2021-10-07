@@ -1,6 +1,7 @@
 package Chess.controller;
 
 import Chess.domain.ChessBoard;
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.Game;
 import Chess.domain.Position;
 import Chess.exception.InvalidUserInputException;
@@ -37,6 +38,7 @@ public class GameController {
 
             if (!game.checkIsKingAlive()) {
                 game.endGame();
+                UnitColor winner = game.getGameWinner();
                 return;
             }
         }

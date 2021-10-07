@@ -121,13 +121,18 @@ public class ChessBoard {
     }
 
     public int getBlackScore() {
-
+        return 0;
     }
 
     public int getWhiteScore() {
-
+        return 0;
     }
 
     public UnitColor getWinner() {
+        if (isWhiteKingAlive()) {
+            return UnitColor.BLACK;
+        }
+
+        return UnitColor.WHITE;
     }
 }

@@ -83,16 +83,16 @@ class ChessBoardTest {
     }
 
     @Test
-    @DisplayName("백팀의 킹이 죽었을 때, 올바르게 판단하는지")
+    @DisplayName("백팀의 킹이 죽었을 때, 승자가 흑팀이라고 판단하는지")
     void test_getWinner_onWhiteKingDead() {
-        chessBoard.setUnitFromCell(7, 4, new EmptyCell());
+        chessBoard.setUnitFromCell(0, 4, new EmptyCell());
         Assertions.assertEquals(UnitColor.BLACK, chessBoard.getWinner());
     }
 
     @Test
-    @DisplayName("흑팀의 킹이 죽었을 때, 올바르게 판단하는지")
+    @DisplayName("흑팀의 킹이 죽었을 때, 승자가 백팀이라고 판단하는지")
     void test_getWinner_onBlackKingDead() {
-        chessBoard.setUnitFromCell(0, 4, new EmptyCell());
+        chessBoard.setUnitFromCell(7, 4, new EmptyCell());
         Assertions.assertEquals(UnitColor.WHITE, chessBoard.getWinner());
     }
 }

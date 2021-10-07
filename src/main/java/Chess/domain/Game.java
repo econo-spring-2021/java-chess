@@ -2,6 +2,7 @@ package Chess.domain;
 
 import Chess.domain.ChessUnit.Unit;
 import Chess.domain.ChessUnit.EmptyCell;
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.view.OutputView;
 
 public class Game {
@@ -19,6 +20,10 @@ public class Game {
 
     public void endGame() {
         isStarted = false;
+    }
+
+    public UnitColor getGameWinner() {
+        return chessBoard.getWinner();
     }
 
     public boolean checkIsKingAlive() {
