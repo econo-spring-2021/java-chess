@@ -73,13 +73,20 @@ class ChessBoardTest {
     @Test
     @DisplayName("겹치는 폰이 있을 때, 제대로 점수를 계산하는지")
     void test_getBlackScore_withDuplicatedPawn() {
-        Assertions.assertEquals(34, chessBoard.getBlackScore());
+        Assertions.assertEquals(34, chessBoard.getScore(UnitColor.BLACK));
     }
 
     @Test
     @DisplayName("겹치는 폰이 없을 때, 제대로 점수를 계산하는지")
     void test_getBlackScore_withoutDuplicatedPawn() {
-        Assertions.assertEquals(31, chessBoard.getBlackScore());
+        chessBoard.setUnitFromCell(1, 1, new EmptyCell());
+        chessBoard.setUnitFromCell(1, 2, new EmptyCell());
+        chessBoard.setUnitFromCell(1, 3, new EmptyCell());
+        chessBoard.setUnitFromCell(1, 4, new EmptyCell());
+        chessBoard.setUnitFromCell(1, 5, new EmptyCell());
+        chessBoard.setUnitFromCell(1, 6, new EmptyCell());
+        chessBoard.setUnitFromCell(1, 7, new EmptyCell());
+        Assertions.assertEquals(31, chessBoard.getScore(UnitColor.BLACK));
     }
 
     @Test

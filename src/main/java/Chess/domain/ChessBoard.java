@@ -120,12 +120,30 @@ public class ChessBoard {
         return false;
     }
 
-    public int getBlackScore() {
-        return 0;
-    }
+    public float getScore(UnitColor targetColor) {
+        float score = 0f;
+        for (Unit[] row : chessBoard) {
+            float pawnScore = 0f;
+            for (Unit unit : row) {
+                if (!unit.getColor().equals(targetColor) || unit.getType().equals(UnitType.EMPTY)) {
+                    continue;
+                }
 
-    public int getWhiteScore() {
-        return 0;
+                if (unit.getType().equals(UnitType.PAWN)) {
+                    pawnScore += unit.getType().getScore();
+                    continue;
+                }
+
+                score += unit.getType().getScore();
+            }
+
+            if (pawnScore > 1f) {
+                pawnScore /= 2;
+            }
+            score += pawnScore;
+        }
+
+        return score;
     }
 
     public UnitColor getWinner() {
