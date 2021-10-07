@@ -58,40 +58,40 @@ class ChessBoardTest {
 
     @Test
     @DisplayName("백팀의 킹만 살아 있을 때, 올바르게 판단하는지")
-    void test_checkIsWhiteKingAlice() {
+    void test_checkIsWhiteKingAlive() {
         chessBoard.setUnitFromCell(7, 4, new EmptyCell());
         Assertions.assertFalse(chessBoard.isWhiteKingAlive());
     }
 
     @Test
     @DisplayName("흑팀의 킹만 살아 있을 때, 올바르게 판단하는지")
-    void test_checkIsBlackKingAlice() {
+    void test_checkIsBlackKingAlive() {
         chessBoard.setUnitFromCell(0, 4, new EmptyCell());
         Assertions.assertFalse(chessBoard.isBlackKingAlive());
     }
 
     @Test
     @DisplayName("겹치는 폰이 있을 때, 제대로 점수를 계산하는지")
-    void test_getBlackScore() {
+    void test_getBlackScore_withDuplicatedPawn() {
         Assertions.assertEquals(34, chessBoard.getBlackScore());
     }
 
     @Test
     @DisplayName("겹치는 폰이 없을 때, 제대로 점수를 계산하는지")
-    void test_getBlackScore() {
+    void test_getBlackScore_withoutDuplicatedPawn() {
         Assertions.assertEquals(31, chessBoard.getBlackScore());
     }
 
     @Test
     @DisplayName("백팀의 킹이 죽었을 때, 올바르게 판단하는지")
-    void test_checkIsWhiteKingAlice() {
+    void test_getWinner_onWhiteKingDead() {
         chessBoard.setUnitFromCell(7, 4, new EmptyCell());
         Assertions.assertEquals(UnitColor.BLACK, chessBoard.getWinner());
     }
 
     @Test
     @DisplayName("흑팀의 킹이 죽었을 때, 올바르게 판단하는지")
-    void test_checkIsBlackKingAlice() {
+    void test_getWinner_onBlackKingDead() {
         chessBoard.setUnitFromCell(0, 4, new EmptyCell());
         Assertions.assertEquals(UnitColor.WHITE, chessBoard.getWinner());
     }
