@@ -147,6 +147,10 @@ public class ChessBoard {
     }
 
     public UnitColor getWinner() {
+        if (!isBlackKingAlive() && !isWhiteKingAlive()) {
+            return null;
+        }
+
         if (isWhiteKingAlive()) {
             return UnitColor.BLACK;
         }

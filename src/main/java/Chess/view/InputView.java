@@ -12,6 +12,7 @@ public class InputView {
     public static final String GAME_START_COMMAND = "start";
     public static final String GAME_END_COMMAND = "end";
     public static final String GAME_MOVE_COMMAND = "move";
+    public static final String GAME_STATUS_COMMAND = "status";
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -24,7 +25,7 @@ public class InputView {
             String input = scanner.nextLine().toLowerCase();
             List<String> commands = Arrays.asList(input.split(" "));
             String command = commands.get(0);
-            if (!command.equals(GAME_START_COMMAND) && !command.equals(GAME_END_COMMAND) && !command.equals(GAME_MOVE_COMMAND)) {
+            if (!command.equals(GAME_START_COMMAND) && !command.equals(GAME_END_COMMAND) && !command.equals(GAME_MOVE_COMMAND) && !command.equals(GAME_STATUS_COMMAND)) {
                 throw new InvalidUserInputException("올바르지 않은 명령어입니다.");
             }
 

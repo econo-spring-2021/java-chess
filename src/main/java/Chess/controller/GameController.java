@@ -1,7 +1,5 @@
 package Chess.controller;
 
-import Chess.domain.ChessBoard;
-import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.Game;
 import Chess.domain.Position;
 import Chess.exception.InvalidUserInputException;
@@ -9,7 +7,6 @@ import Chess.view.InputView;
 import Chess.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GameController {
@@ -38,7 +35,6 @@ public class GameController {
 
             if (!game.checkIsKingAlive()) {
                 game.endGame();
-                UnitColor winner = game.getGameWinner();
                 return;
             }
         }
@@ -52,6 +48,9 @@ public class GameController {
             case InputView.GAME_MOVE_COMMAND:
                 executeMoveCommand(args);
                 break;
+            case InputView.GAME_STATUS_COMMAND:
+                executeStatusCommand();
+                break;
         }
     }
 
@@ -61,7 +60,7 @@ public class GameController {
     }
 
     private void executeMoveCommand(List<String> args) {
-        if (!game.isGameStarted()) {
+        if (!game.getIsPlaying()) {
             OutputView.printException(new InvalidUserInputException("게임 시작 전에 체스말을 움직일 수 없습니다"));
             return;
         }
@@ -71,5 +70,17 @@ public class GameController {
 
         game.moveChessUnit(source, destination);
         game.showChessBoard();
+    }
+
+    private void executeStatusCommand() {
+        if (!game.getIsPlaying()) {
+            OutputView.printException(new InvalidUserInputException("아직 게임 시작 전 입니다."));
+        }
+
+        if (!game.getIsPlaying()) {
+            OutputView.printGameResult(game.getGameWinner());
+        }
+
+        OutputView.printPlayerScore(game.getBlackScore(), game.getWhiteScore());
     }
 }

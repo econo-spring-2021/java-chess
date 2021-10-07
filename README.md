@@ -39,6 +39,6 @@
 * [x] King이 죽으면 게임 종료 
 * [ ] status 명령어 구
   * [x] test case
-  * [ ] 승패 판별 구현
-  * [ ] 점수 판별 구현
-  * [ ] input, output
+  * [x] 승패 판별 구현
+  * [x] 점수 판별 구현
+  * [x] input, output

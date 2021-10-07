@@ -8,18 +8,24 @@ import Chess.view.OutputView;
 public class Game {
     ChessBoard chessBoard = ChessBoard.getInstance();
     boolean isStarted = false;
+    boolean isPlaying = false;
 
-    public boolean isGameStarted() {
+    public boolean getIsStarted() {
         return isStarted;
+    }
+
+    public boolean getIsPlaying() {
+        return isPlaying;
     }
 
     public void initializeGame() {
         isStarted = true;
+        isPlaying = true;
         chessBoard.initializeChessGame();
     }
 
     public void endGame() {
-        isStarted = false;
+        isPlaying = false;
     }
 
     public UnitColor getGameWinner() {
@@ -32,6 +38,14 @@ public class Game {
         }
 
         return false;
+    }
+
+    public float getBlackScore() {
+        return chessBoard.getScore(UnitColor.BLACK);
+    }
+
+    public float getWhiteScore() {
+        return chessBoard.getScore(UnitColor.WHITE);
     }
 
     public void showChessBoard() {
