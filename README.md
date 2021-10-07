@@ -34,3 +34,10 @@
 * [x] 게임 로직 코드에서의 Position 클래스와 관련된 예외 처리
 * [x] Exception 추가 및 처리
 * [ ] 체스말의 interface 리팩토링과 MovableStrategy interface 도입
+
+# 3 step features
+* [ ] King이 죽으면 게임 종료 
+* [ ] status 명령어 구
+  * [ ] test case
+  * [ ] input, output
+  * [ ] feature

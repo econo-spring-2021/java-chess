@@ -6,14 +6,16 @@ import Chess.exception.InvalidPositionException;
 import Chess.exception.InvalidPositionException;
 
 public class Pawn extends Unit {
+    public static UnitType TYPE = UnitType.PAWN;
+
     private boolean isFirstMovement = true;
 
     public Pawn() {
-        super(UnitType.PAWN);
+        super(TYPE);
     }
 
     public Pawn(UnitColor color) {
-        super(UnitType.PAWN, color);
+        super(TYPE, color);
     }
 
     @Override

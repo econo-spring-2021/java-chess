@@ -5,12 +5,13 @@ import Chess.domain.Position;
 import Chess.exception.InvalidPositionException;
 
 public class Rook extends Unit {
+    public static UnitType TYPE = UnitType.ROOK;
     public Rook() {
-        super(UnitType.ROOK);
+        super(TYPE);
     }
 
     public Rook(UnitColor color) {
-        super(UnitType.ROOK, color);
+        super(TYPE, color);
     }
 
     @Override

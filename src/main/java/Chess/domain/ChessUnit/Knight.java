@@ -4,12 +4,13 @@ import Chess.domain.Position;
 import Chess.exception.InvalidPositionException;
 
 public class Knight extends Unit {
+    public static UnitType TYPE = UnitType.KNIGHT;
     public Knight() {
-        super(UnitType.KNIGHT);
+        super(TYPE);
     }
 
     public Knight(UnitColor color) {
-        super(UnitType.KNIGHT, color);
+        super(TYPE, color);
     }
 
     @Override

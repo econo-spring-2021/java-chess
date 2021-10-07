@@ -5,12 +5,13 @@ import Chess.domain.Position;
 import Chess.exception.InvalidPositionException;
 
 public class Bishop extends Unit {
+    public static UnitType TYPE = UnitType.BISHOP;
     public Bishop() {
-        super(UnitType.BISHOP);
+        super(TYPE);
     }
 
     public Bishop(UnitColor color) {
-        super(UnitType.BISHOP, color);
+        super(TYPE, color);
     }
 
     @Override

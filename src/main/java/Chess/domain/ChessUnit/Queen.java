@@ -5,12 +5,13 @@ import Chess.domain.Position;
 import Chess.exception.InvalidPositionException;
 
 public class Queen extends Unit {
+    public static UnitType TYPE = UnitType.QUEEN;
     public Queen() {
-        super(UnitType.QUEEN);
+        super(TYPE);
     }
 
     public Queen(UnitColor color) {
-        super(UnitType.QUEEN, color);
+        super(TYPE, color);
     }
 
     @Override

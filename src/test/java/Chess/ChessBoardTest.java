@@ -3,6 +3,7 @@ package Chess;
 import Chess.domain.ChessBoard;
 import Chess.domain.ChessUnit.Unit;
 import Chess.domain.ChessUnit.Rook;
+import Chess.domain.ChessUnit.UnitType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,12 +19,12 @@ class ChessBoardTest {
 
     @Test
     @DisplayName("게임을 위한 체스판이 제대로 초기화되었는지")
-    void test_initializeChessUnit() {
+    void test_initializeChessUnit() throws Exception {
         for (int i = 0; i < ChessBoard.CHESSBOARD_COLUMN; i++) {
-//            Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], chessBoard.getUnitFromCell(ChessBoard.BLACK_SPECIAL_CHESS_UNIT_ROW, i).getType());
-//            Assertions.assertEquals(ChessUnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.BLACK_PAWN_CHESS_UNIT_ROW, i).getType());
-//            Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION[i], chessBoard.getUnitFromCell(ChessBoard.WHITE_SPECIAL_CHESS_UNIT_ROW, i).getType());
-//            Assertions.assertEquals(ChessUnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.WHITE_PAWN_CHESS_INIT_ROW, i).getType());
+//            Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getField("TYPE").get(), chessBoard.getUnitFromCell(ChessBoard.BLACK_SPECIAL_CHESS_UNIT_ROW, i).getType());
+//            Assertions.assertEquals(UnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.BLACK_PAWN_CHESS_UNIT_ROW, i).getType());
+//            Assertions.assertEquals(ChessBoard.INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getField("TYPE"), chessBoard.getUnitFromCell(ChessBoard.WHITE_SPECIAL_CHESS_UNIT_ROW, i).getType());
+//            Assertions.assertEquals(UnitType.PAWN, chessBoard.getUnitFromCell(ChessBoard.WHITE_PAWN_CHESS_INIT_ROW, i).getType());
         }
     }
 

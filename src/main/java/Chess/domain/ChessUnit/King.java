@@ -4,12 +4,13 @@ import Chess.domain.Position;
 import Chess.exception.InvalidPositionException;
 
 public class King extends Unit {
+    public static UnitType TYPE = UnitType.KING;
     public King() {
-        super(UnitType.KING);
+        super(TYPE);
     }
 
     public King(UnitColor color) {
-        super(UnitType.KING, color);
+        super(TYPE, color);
     }
 
     @Override
