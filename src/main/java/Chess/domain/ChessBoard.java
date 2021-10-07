@@ -119,4 +119,15 @@ public class ChessBoard {
 
         return false;
     }
+
+    public int getBlackScore() {
+
+    }
+
+    public int getWhiteScore() {
+
+    }
+
+    public UnitColor getWinner() {
+    }
 }

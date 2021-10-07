@@ -38,7 +38,7 @@
 # 3 step features
 * [x] King이 죽으면 게임 종료 
 * [ ] status 명령어 구
-  * [ ] test case
+  * [x] test case
   * [ ] input, output
   * [ ] 점수 판별 구현
   * [ ] 승패 판별 구현

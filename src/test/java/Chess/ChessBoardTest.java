@@ -1,10 +1,7 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
-import Chess.domain.ChessUnit.EmptyCell;
-import Chess.domain.ChessUnit.Unit;
-import Chess.domain.ChessUnit.Rook;
-import Chess.domain.ChessUnit.UnitType;
+import Chess.domain.ChessUnit.*;
 import Chess.domain.Game;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,5 +68,31 @@ class ChessBoardTest {
     void test_checkIsBlackKingAlice() {
         chessBoard.setUnitFromCell(0, 4, new EmptyCell());
         Assertions.assertFalse(chessBoard.isBlackKingAlive());
+    }
+
+    @Test
+    @DisplayName("겹치는 폰이 있을 때, 제대로 점수를 계산하는지")
+    void test_getBlackScore() {
+        Assertions.assertEquals(34, chessBoard.getBlackScore());
+    }
+
+    @Test
+    @DisplayName("겹치는 폰이 없을 때, 제대로 점수를 계산하는지")
+    void test_getBlackScore() {
+        Assertions.assertEquals(31, chessBoard.getBlackScore());
+    }
+
+    @Test
+    @DisplayName("백팀의 킹이 죽었을 때, 올바르게 판단하는지")
+    void test_checkIsWhiteKingAlice() {
+        chessBoard.setUnitFromCell(7, 4, new EmptyCell());
+        Assertions.assertEquals(UnitColor.BLACK, chessBoard.getWinner());
+    }
+
+    @Test
+    @DisplayName("흑팀의 킹이 죽었을 때, 올바르게 판단하는지")
+    void test_checkIsBlackKingAlice() {
+        chessBoard.setUnitFromCell(0, 4, new EmptyCell());
+        Assertions.assertEquals(UnitColor.WHITE, chessBoard.getWinner());
     }
 }
