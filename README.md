@@ -45,3 +45,4 @@
 
 # Refactoring after feedback
 * [x] Fix Chessboard initializing test
+* [x] instanceof 사용 부분 리펙토링

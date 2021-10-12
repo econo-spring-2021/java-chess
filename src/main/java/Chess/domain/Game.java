@@ -3,6 +3,7 @@ package Chess.domain;
 import Chess.domain.ChessUnit.Unit;
 import Chess.domain.ChessUnit.EmptyCell;
 import Chess.domain.ChessUnit.UnitColor;
+import Chess.domain.ChessUnit.UnitType;
 import Chess.view.OutputView;
 
 public class Game {
@@ -56,7 +57,7 @@ public class Game {
     public void moveChessUnit(Position source, Position destination) {
         try {
             Unit unit = chessBoard.getUnitFromCell(source);
-            if (unit instanceof EmptyCell) {
+            if (unit.getType().equals(UnitType.EMPTY)) {
                 throw new IllegalArgumentException("그 곳에는 움직일 체스말이 없습니다.");
             }
 

@@ -45,7 +45,7 @@ public abstract class Unit {
 
     protected boolean isExistTeammateOnDestination(Position position) {
         Unit unit = ChessBoard.getInstance().getUnitFromCell(position);
-        if (unit instanceof EmptyCell || color != unit.getColor()) {
+        if (unit.getType().equals(UnitType.EMPTY) || !unit.getColor().equals(color)) {
             return false;
         }
 

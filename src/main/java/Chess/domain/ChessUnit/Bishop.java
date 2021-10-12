@@ -43,9 +43,7 @@ public class Bishop extends Unit {
         position.setNextColToCheck(destination);
 
         for (; position.getRow() != destination.getRow(); position.setNextRowToCheck(destination), position.setNextColToCheck(destination)) {
-            int r = position.getRow();
-            int r2 = destination.getRow();
-            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position).getType().equals(UnitType.EMPTY))) {
                 return true;
             }
         }

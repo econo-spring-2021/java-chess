@@ -62,7 +62,7 @@ public class Queen extends Unit {
         position.setNextRowToCheck(destination);
 
         for (;position.getRow() != destination.getRow(); position.setNextRowToCheck(destination)) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position).getType().equals(UnitType.EMPTY))) {
                 return true;
             }
         }
@@ -75,7 +75,7 @@ public class Queen extends Unit {
         position.setNextColToCheck(destination);
 
         for (;position.getCol() != destination.getCol(); position.setNextColToCheck(destination)) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position).getType().equals(UnitType.EMPTY))) {
                 return true;
             }
         }
@@ -89,7 +89,7 @@ public class Queen extends Unit {
         position.setNextColToCheck(destination);
 
         for (; position.getRow() != destination.getRow(); position.setNextRowToCheck(destination), position.setNextColToCheck(destination)) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(position) instanceof EmptyCell)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position).getType().equals(UnitType.EMPTY))) {
                 return true;
             }
         }
