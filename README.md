@@ -42,3 +42,6 @@
   * [x] 승패 판별 구현
   * [x] 점수 판별 구현
   * [x] input, output
+
+# Refactoring after feedback
+* [x] Fix Chessboard initializing test
