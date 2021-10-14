@@ -25,11 +25,7 @@ public class Rook extends Unit {
             throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
         }
 
-        if (source.getRow() == destination.getRow() && isObstacleExistOnColumnPath(source, destination)) {
-            throw new InvalidPositionException(InvalidPositionException.OBSTACLE_IN_PATH);
-        }
-
-        if (source.getCol() == destination.getCol() && isObstacleExistOnRowPath(source, destination)) {
+        if (isObstacleExistOnPath(source, destination)) {
             throw new InvalidPositionException(InvalidPositionException.OBSTACLE_IN_PATH);
         }
     }
@@ -42,6 +38,20 @@ public class Rook extends Unit {
         return true;
     }
 
+    /**
+     * 룩의 상하좌우 이동 경로에 장애물이 있는지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
+    private boolean isObstacleExistOnPath(Position source, Position destination) {
+        return isObstacleExistOnRowPath(source, destination) || isObstacleExistOnColumnPath(source, destination);
+    }
+
+    /**
+     * 상하 이동 경로의 장애물을 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isObstacleExistOnRowPath(Position source, Position destination) {
         Position position = new Position(source);
         position.setNextRowToCheck(destination);
@@ -55,6 +65,11 @@ public class Rook extends Unit {
         return false;
     }
 
+    /**
+     * 좌우 이동 경로의 장애물을 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isObstacleExistOnColumnPath(Position source, Position destination) {
         Position position = new Position(source);
         position.setNextColToCheck(destination);

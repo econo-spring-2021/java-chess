@@ -47,6 +47,6 @@
 * [x] Fix Chessboard initializing test
 * [x] instanceof 사용 부분 리펙토링
 * [x] Rook class의 잘못된 TYPE 고치기 
-* [ ] javadoc 주석 작성
+* [x] javadoc 주석 작성
 * [ ] 반복된 한줄 . 수정
 * [ ] 명령어 switch 수정 

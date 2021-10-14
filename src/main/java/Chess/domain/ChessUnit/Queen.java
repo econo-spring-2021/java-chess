@@ -33,6 +33,11 @@ public class Queen extends Unit {
         return isAbleRookMovement(source, destination) || isAbleBishopMovement(source, destination);
     }
 
+    /**
+     * 킹의 상하좌우 이동 규칙에 부합하는 이동인지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isAbleRookMovement(Position source, Position destination) {
         if (source.getRow() != destination.getRow() && source.getCol() != destination.getCol()) {
             return false;
@@ -41,6 +46,11 @@ public class Queen extends Unit {
         return true;
     }
 
+    /**
+     * 킹의 대각선 이동 규칙에 부합하는 이동인지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isAbleBishopMovement(Position source, Position destination) {
         if (Math.abs(source.getRow() - destination.getRow()) != Math.abs(source.getCol() - destination.getCol())) {
             return false;
@@ -53,10 +63,20 @@ public class Queen extends Unit {
         return isObstacleExistOnRookPath(source, destination) || isExistObstacleOnDiagonalPath(source, destination);
     }
 
+    /**
+     * 킹의 상하좌우 이동 경로에 장애물이 있는지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isObstacleExistOnRookPath(Position source, Position destination) {
         return isObstacleExistOnRowPath(source, destination) || isObstacleExistOnColumnPath(source, destination);
     }
 
+    /**
+     * 상하 이동 경로의 장애물을 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isObstacleExistOnRowPath(Position source, Position destination) {
         Position position = new Position(source);
         position.setNextRowToCheck(destination);
@@ -70,6 +90,11 @@ public class Queen extends Unit {
         return false;
     }
 
+    /**
+     * 좌우 이동 경로의 장애물을 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isObstacleExistOnColumnPath(Position source, Position destination) {
         Position position = new Position(source);
         position.setNextColToCheck(destination);
@@ -83,6 +108,11 @@ public class Queen extends Unit {
         return false;
     }
 
+    /**
+     * 킹의 대각선 이동 경로에 장애물이 있는지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isExistObstacleOnDiagonalPath(Position source, Position destination) {
         Position position = new Position(source);
         position.setNextRowToCheck(destination);

@@ -53,6 +53,11 @@ public class Pawn extends Unit {
         }
     }
 
+    /**
+     * 폰의 기본 이동 규칙에 부합하는 이동인지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isAbleMovement(Position source, Position destination) {
         if (Math.abs(source.getRow() - destination.getRow()) != 1) {
             return false;
@@ -61,6 +66,11 @@ public class Pawn extends Unit {
         return true;
     }
 
+    /**
+     * 폰의 팀에 따른 이동 방향이 올바른지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isRightDirectionMove(Position source, Position destination) {
         if (color == UnitColor.WHITE && source.getRow() - destination.getRow() < 0) {
             return false;
@@ -73,6 +83,11 @@ public class Pawn extends Unit {
         return true;
     }
 
+    /**
+     * 폰이 공격용 이동 규칙에 부합하는 이동인지 검사한다
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isAbleAttackMove(Position source, Position destination) {
         if (Math.abs(source.getRow() - destination.getRow()) == 1 && Math.abs(source.getCol() - destination.getCol()) == 1) {
             return true;
@@ -81,6 +96,11 @@ public class Pawn extends Unit {
         return false;
     }
 
+    /**
+     * 킹의 첫 이동 규칙에 부합하는 이동인지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
     private boolean isFirstMove(Position source, Position destination) {
         if (Math.abs(source.getRow() - destination.getRow()) == 2) {
             return true;
