@@ -5,7 +5,7 @@ import Chess.domain.Position;
 import Chess.exception.InvalidPositionException;
 
 public class Rook extends Unit {
-    public static UnitType TYPE = UnitType.KING;
+    public static UnitType TYPE = UnitType.ROOK;
 
     public Rook() {
         super(TYPE);

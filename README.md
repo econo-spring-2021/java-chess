@@ -18,7 +18,7 @@
   * [x] 명령어 안내 콘솔 출력 구현
   * [x] move 명령 입력 받기
   * [x] move 명령 수행 코드 작성
-* [x] 이동 경로에 장애물이 있는 경우, 뛰어넘어서 이동할 수 없는 체스말의 isAbleToMove() 수정
+* [x] 이동 경로에 장애물이 있는 경우, 뛰어넘어서 이동할 수 없는 체스말의 isA****bleToMove() 수정
 * [x] 목적이에 아군이 있는 경우, 체스말의 isAbleToMove() 수정
 * [x] Move() 관련하여 부족한 테스트 코드 추가
 
@@ -33,7 +33,7 @@
 * [x] 체스말 위치&이동에 대한 정보와 관렴 함수들 클래스화 (Position.java)
 * [x] 게임 로직 코드에서의 Position 클래스와 관련된 예외 처리
 * [x] Exception 추가 및 처리
-* [ ] 체스말의 interface 리팩토링과 MovableStrategy interface 도입
+* [ ] 체스말의 interface 리팩토링과 MovableStrategy interface 도입****
 
 # 3 step features
 * [x] King이 죽으면 게임 종료 
@@ -46,3 +46,7 @@
 # Refactoring after feedback
 * [x] Fix Chessboard initializing test
 * [x] instanceof 사용 부분 리펙토링
+* [x] Rook class의 잘못된 TYPE 고치기 
+* [ ] javadoc 주석 작성
+* [ ] 반복된 한줄 . 수정
+* [ ] 명령어 switch 수정 
