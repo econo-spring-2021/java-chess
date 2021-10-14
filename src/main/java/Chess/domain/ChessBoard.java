@@ -54,9 +54,15 @@ public class ChessBoard {
 
     private void initializeChessUnit() throws Exception {
         for (int i = 0; i < CHESSBOARD_COLUMN; i++) {
-            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(UnitColor.class).newInstance(UnitColor.BLACK));
+            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION
+                                                                .get(i)
+                                                                .getConstructor(UnitColor.class)
+                                                                .newInstance(UnitColor.BLACK));
             setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new Pawn(UnitColor.BLACK));
-            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(UnitColor.class).newInstance(UnitColor.WHITE));
+            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION
+                                                                .get(i)
+                                                                .getConstructor(UnitColor.class)
+                                                                .newInstance(UnitColor.WHITE));
             setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new Pawn(UnitColor.WHITE));
         }
     }
