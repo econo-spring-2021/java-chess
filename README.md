@@ -54,7 +54,7 @@
 # 4 step features
 * [x] spring boot project 생성
 * [ ] Web page
-  * [ ] Test code for index web page
+  * [x] Test code for index web page
   * [ ] Html, CSS for index web page
 * [ ] Web page feature
   * [ ] Game Start
