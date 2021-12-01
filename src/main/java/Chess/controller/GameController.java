@@ -65,11 +65,15 @@ public class GameController {
             return;
         }
 
-        Position source = new Position(args.get(0));
-        Position destination = new Position(args.get(1));
+        try {
+            Position source = new Position(args.get(0));
+            Position destination = new Position(args.get(1));
 
-        game.moveChessUnit(source, destination);
-        game.showChessBoard();
+            game.moveChessUnit(source, destination);
+            game.showChessBoard();
+        } catch (Exception e) {
+            OutputView.printException(e);
+        }
     }
 
     private void executeStatusCommand() {

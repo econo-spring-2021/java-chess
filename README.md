@@ -33,11 +33,11 @@
 * [x] 체스말 위치&이동에 대한 정보와 관렴 함수들 클래스화 (Position.java)
 * [x] 게임 로직 코드에서의 Position 클래스와 관련된 예외 처리
 * [x] Exception 추가 및 처리
-* [ ] 체스말의 interface 리팩토링과 MovableStrategy interface 도입****
+~~* [ ] 체스말의 interface 리팩토링과 MovableStrategy interface 도입~~
 
 # 3 step features
 * [x] King이 죽으면 게임 종료 
-* [ ] status 명령어 구
+* [x] status 명령어 구
   * [x] test case
   * [x] 승패 판별 구현
   * [x] 점수 판별 구현
@@ -50,3 +50,21 @@
 * [x] javadoc 주석 작성
 * [x] 반복된 한줄 . 수정
 * [ ] 명령어 switch 수정 
+
+# 4 step features
+* [x] spring boot project 생성
+* [ ] Web page
+  * [ ] Test code for index web page
+  * [ ] Html, CSS for index web page
+* [ ] Web page feature
+  * [ ] Game Start
+    * [ ] Add the mapping method for game start
+    * [ ] Send the request & Create chess unit on web
+  * [ ] Unit Move
+    * [ ] Add the mapping methods for unit moving
+    * [ ] Send the request & Move unit on web
+    * [ ] Deal with wrong unit movement by request response code
+  * [ ] Game Status
+    * [ ] Check game end whenever unit move
+    * [ ] Add the mapping method for showing game score
+    * [ ] Print the game score on web

@@ -1,8 +1,20 @@
-plugins {
-    id 'java'
+buildscript{
+    ext {
+        springBootVersion = '2.1.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
-version = '1.0.0'
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
@@ -10,8 +22,9 @@ repositories {
 }
 
 dependencies {
-    testCompile('org.junit.jupiter:junit-jupiter:5.7.0')
-    testCompile('org.assertj:assertj-core:3.20.2')
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
+    testImplementation('org.junit.jupiter:junit-jupiter:5.7.0')
+    testImplementation('org.assertj:assertj-core:3.20.2')
 }
 
 test {
