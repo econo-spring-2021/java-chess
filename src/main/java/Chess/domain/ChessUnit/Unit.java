@@ -41,7 +41,7 @@ public abstract class Unit {
         ChessBoard.getInstance().setUnitFromCell(source, new EmptyCell());
     }
 
-    protected abstract void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException;
+    public abstract void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException;
 
     protected boolean isExistTeammateOnDestination(Position position) {
         Unit unit = ChessBoard.getInstance().getUnitFromCell(position);

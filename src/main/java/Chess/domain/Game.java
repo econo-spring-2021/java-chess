@@ -1,26 +1,21 @@
 package Chess.domain;
 
 import Chess.domain.ChessUnit.Unit;
-import Chess.domain.ChessUnit.EmptyCell;
 import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.UnitType;
+import Chess.exception.InvalidPositionException;
 import Chess.view.OutputView;
 
 public class Game {
     ChessBoard chessBoard = ChessBoard.getInstance();
-    boolean isStarted = false;
     boolean isPlaying = false;
 
-    public boolean getIsStarted() {
-        return isStarted;
-    }
 
     public boolean getIsPlaying() {
         return isPlaying;
     }
 
     public void initializeGame() {
-        isStarted = true;
         isPlaying = true;
         chessBoard.initializeChessGame();
     }
@@ -49,9 +44,15 @@ public class Game {
         return chessBoard.getScore(UnitColor.WHITE);
     }
 
-    public void showChessBoard() {
-        String chessBoardStr = chessBoard.convertChessBoardToString();
-        OutputView.printString(chessBoardStr);
+    public boolean getIsMovableUnit(Position source, Position destination) {
+        Unit unit = chessBoard.getUnitFromCell(source);
+        try {
+            unit.validateIsAbleToMove(source, destination);
+
+            return true;
+        } catch (InvalidPositionException e) {
+            return false;
+        }
     }
 
     public void moveChessUnit(Position source, Position destination) {

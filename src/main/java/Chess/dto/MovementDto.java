@@ -1,5 +1,8 @@
 package Chess.dto;
 
+import Chess.domain.ChessBoard;
+import Chess.domain.Position;
+
 public class MovementDto {
 
     private int source;
@@ -13,11 +16,11 @@ public class MovementDto {
         this.destination = destination;
     }
 
-    public int getSource() {
-        return source;
+    public Position getSourcePosition() {
+        return new Position(source%ChessBoard.CHESSBOARD_COLUMN - 1, source/ChessBoard.CHESSBOARD_COLUMN);
     }
 
-    public int getDestination() {
-        return destination;
+    public Position getDestinationPosition() {
+        return new Position(destination%ChessBoard.CHESSBOARD_COLUMN - 1, destination/ChessBoard.CHESSBOARD_COLUMN);
     }
 }

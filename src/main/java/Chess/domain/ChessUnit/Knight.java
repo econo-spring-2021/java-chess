@@ -14,7 +14,7 @@ public class Knight extends Unit {
     }
 
     @Override
-    protected void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException {
+    public void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException {
         if (isExistTeammateOnDestination(destination)) {
             throw new InvalidPositionException(InvalidPositionException.TEAMMATE_ON_DESTINATION);
         }

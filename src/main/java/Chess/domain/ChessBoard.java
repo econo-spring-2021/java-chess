@@ -90,18 +90,6 @@ public class ChessBoard {
         chessBoard[position.getRow()][position.getCol()] = unit;
     }
 
-    public String convertChessBoardToString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Unit[] row : chessBoard) {
-            for (Unit unit : row) {
-                stringBuilder.append(unit.getTypeSymbol());
-            }
-            stringBuilder.append('\n');
-        }
-
-        return stringBuilder.toString();
-    }
-
     public Boolean isWhiteKingAlive() {
         for (Unit[] row : chessBoard) {
             for (Unit unit : row) {

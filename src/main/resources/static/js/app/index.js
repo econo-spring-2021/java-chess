@@ -18,21 +18,21 @@ var main = {
     },
 
     startGame: function () {
-        this.setUnitImage();
-        this.resetScoreText();
-
         $.ajax({
             type: 'POST',
             url: '/api/game/start',
 
         }).done(function() {
-            isGameProgress = true
+            isGameProgress = true;
+            this.setUnitImage();
+            this.resetScoreText();
 
         }).fail(function (err) { alert(JSON.stringify(err))});
     },
 
 
     setUnitImage: function () {
+        alert("d???")
         for (let i = 1; i <= 64; i++) {
             let cellId = "#cell" + i;
             $(cellId).css('backgroundImage', '');

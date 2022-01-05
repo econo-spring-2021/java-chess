@@ -1,90 +1,66 @@
 package Chess.controller;
 
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.Game;
+import Chess.domain.GameState;
 import Chess.domain.Position;
+import Chess.dto.MovementDto;
 import Chess.exception.InvalidUserInputException;
-import Chess.view.InputView;
 import Chess.view.OutputView;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
+@Service
 public class GameController {
     Game game = new Game();
 
-    public void start() {
-        OutputView.announceGameStart();
-        OutputView.askGameOperationCommand();
 
-        loopForCommand();
-    }
-
-    private void loopForCommand() {
-        while (true) {
-            List<String> commands = InputView.getGameOperationCommands();
-            String command = commands.get(0);
-            if (command.equals(InputView.GAME_END_COMMAND)) {
-                return;
-            }
-
-            List<String> args = new ArrayList<>();
-            if (commands.size() > 1) {
-                args = commands.subList(1, commands.size());
-            }
-            executeCommand(command, args);
-
-            if (!game.checkIsKingAlive()) {
-                game.endGame();
-                return;
-            }
-        }
-    }
-
-    private void executeCommand(String command, List<String> args) {
-        switch (command) {
-            case InputView.GAME_START_COMMAND:
-                executeStartCommand();
-                break;
-            case InputView.GAME_MOVE_COMMAND:
-                executeMoveCommand(args);
-                break;
-            case InputView.GAME_STATUS_COMMAND:
-                executeStatusCommand();
-                break;
-        }
-    }
-
-    private void executeStartCommand() {
+    public void executeStartCommand() {
         game.initializeGame();
-        game.showChessBoard();
     }
 
-    private void executeMoveCommand(List<String> args) {
+    public boolean getIsMovableUnit(MovementDto movementDto) {
+        Position source = movementDto.getSourcePosition();
+        Position destination = movementDto.getDestinationPosition();
+
+        return game.getIsMovableUnit(source, destination);
+    }
+
+    public void executeMoveCommand(MovementDto movementDto) {
         if (!game.getIsPlaying()) {
-            OutputView.printException(new InvalidUserInputException("게임 시작 전에 체스말을 움직일 수 없습니다"));
-            return;
+            throw new InvalidUserInputException("게임 시작 전에 체스말을 움직일 수 없습니다");
         }
 
         try {
-            Position source = new Position(args.get(0));
-            Position destination = new Position(args.get(1));
+            Position source = movementDto.getSourcePosition();
+            Position destination = movementDto.getDestinationPosition();
 
             game.moveChessUnit(source, destination);
-            game.showChessBoard();
+            if (!game.getGameWinner().equals(null)) {
+                game.endGame();
+            }
         } catch (Exception e) {
             OutputView.printException(e);
         }
     }
 
-    private void executeStatusCommand() {
-        if (!game.getIsPlaying()) {
-            OutputView.printException(new InvalidUserInputException("아직 게임 시작 전 입니다."));
+    public float getBlackScore() {
+        return game.getBlackScore();
+    }
+
+    public float getWhiteScore() {
+        return game.getWhiteScore();
+    }
+
+    public GameState executeStatusCommand() {
+        if (game.getIsPlaying()) {
+            return GameState.ONGOING;
         }
 
-        if (!game.getIsPlaying()) {
-            OutputView.printGameResult(game.getGameWinner());
+        UnitColor winner = game.getGameWinner();
+        if (winner.equals(UnitColor.BLACK)) {
+            return GameState.BLACKWIN;
         }
 
-        OutputView.printPlayerScore(game.getBlackScore(), game.getWhiteScore());
+        return GameState.WHITEWIN;
     }
 }

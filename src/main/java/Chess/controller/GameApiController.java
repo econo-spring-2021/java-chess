@@ -2,41 +2,47 @@ package Chess.controller;
 
 import Chess.domain.GameState;
 import Chess.dto.MovementDto;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class GameApiController {
+
+    public GameApiController(GameController gameController) {
+        this.gameController = gameController;
+    }
+
+    private final GameController gameController;
 
     @PostMapping("/api/game/start")
     public void startGame() {
-
+        gameController.executeStartCommand();
     }
 
     @GetMapping("/api/unit/movable")
     public boolean getIsMovableUnit(@RequestBody MovementDto movementDto) {
-        return false;
+        return gameController.getIsMovableUnit(movementDto);
     }
 
     @PostMapping("/api/unit/move")
     public void moveUnit(@RequestBody MovementDto movementDto) {
-
+        gameController.executeMoveCommand(movementDto);
     }
 
     @GetMapping("/api/game/score/black")
-    public int getBlackScore() {
-        return 0;
+    public Float getBlackScore() {
+        return gameController.getBlackScore();
     }
 
     @GetMapping("/api/game/score/white")
-    public int getWhiteScore() {
-        return 0;
+    public Float getWhiteScore() {
+        return gameController.getWhiteScore();
     }
 
     @GetMapping("/api/game/state")
     public GameState getGameState() {
-        return GameState.ONGOING;
+        return gameController.executeStatusCommand();
     }
 }

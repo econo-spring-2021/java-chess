@@ -8,7 +8,7 @@ public class EmptyCell extends Unit {
     }
 
     @Override
-    protected void validateIsAbleToMove(Position source, Position destination) {
+    public void validateIsAbleToMove(Position source, Position destination) {
 
     }
 }
