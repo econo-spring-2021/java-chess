@@ -23,7 +23,7 @@ var main = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/start',
+            url: '/api/game/start',
 
         }).done(function() {
             isGameProgress = true
@@ -101,7 +101,7 @@ var main = {
 
             $.ajax({
                 type: 'GET',
-                url: '/api/movable',
+                url: '/api/unit/movable',
                 dataType: 'json',
                 data: JSON.stringify(movement)
 
@@ -121,7 +121,7 @@ var main = {
     moveUnit : function (movement) {
         $.ajax({
             type: 'POST',
-            url: '/api/move',
+            url: '/api/unit/move',
             dataType: 'json',
             data: JSON.stringify(movement)
 
@@ -164,7 +164,7 @@ var main = {
     getBlackScore: function () {
         $.ajax({
             type: 'GET',
-            url: '/api/score/black',
+            url: '/api/game/score/black',
 
         }).done(function (data) {
             $('#text-blackScore').text(data)
@@ -177,7 +177,7 @@ var main = {
     getWhiteScore: function () {
         $.ajax({
             type: 'GET',
-            url: '/api/score/white',
+            url: '/api/game/score/white',
 
         }).done(function (data) {
             $('#text-whiteScore').text(data)
@@ -190,7 +190,7 @@ var main = {
     checkGameStatus : function () {
         $.ajax({
             type: 'GET',
-            url: '/api/status',
+            url: '/api/game/state',
 
         }).done(function (data) {
             if (data === "ONGOING") {
