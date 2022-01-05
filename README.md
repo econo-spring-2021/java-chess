@@ -52,19 +52,3 @@
 * [ ] 명령어 switch 수정 
 
 # 4 step features
-* [x] spring boot project 생성
-* [ ] Web page
-  * [x] Test code for index web page
-  * [ ] Html, CSS for index web page
-* [ ] Web page feature
-  * [ ] Game Start
-    * [ ] Add the mapping method for game start
-    * [ ] Send the request & Create chess unit on web
-  * [ ] Unit Move
-    * [ ] Add the mapping methods for unit moving
-    * [ ] Send the request & Move unit on web
-    * [ ] Deal with wrong unit movement by request response code
-  * [ ] Game Status
-    * [ ] Check game end whenever unit move
-    * [ ] Add the mapping method for showing game score
-    * [ ] Print the game score on web
