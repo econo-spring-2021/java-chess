@@ -45,4 +45,9 @@ public class GameApiController {
     public GameState getGameState() {
         return gameController.executeStatusCommand();
     }
+
+    @GetMapping("/api/game/data")
+    public String loadGameData() {
+        return gameController.getChessboardData();
+    }
 }

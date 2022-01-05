@@ -52,6 +52,10 @@ public class GameController {
     }
 
     public GameState executeStatusCommand() {
+        if (game.getIsStarted()) {
+            return GameState.IDLE;
+        }
+
         if (game.getIsPlaying()) {
             return GameState.ONGOING;
         }
@@ -62,5 +66,9 @@ public class GameController {
         }
 
         return GameState.WHITEWIN;
+    }
+
+    public String getChessboardData() {
+        return game.getChessboardData();
     }
 }

@@ -8,14 +8,19 @@ import Chess.view.OutputView;
 
 public class Game {
     ChessBoard chessBoard = ChessBoard.getInstance();
+    boolean isStarted = false;
     boolean isPlaying = false;
 
+    public boolean getIsStarted() {
+        return isStarted;
+    }
 
     public boolean getIsPlaying() {
         return isPlaying;
     }
 
     public void initializeGame() {
+        isStarted = true;
         isPlaying = true;
         chessBoard.initializeChessGame();
     }
@@ -66,5 +71,9 @@ public class Game {
         } catch (Exception e) {
             OutputView.printException(e);
         }
+    }
+
+    public String getChessboardData() {
+        return chessBoard.convertChessBoardToString();
     }
 }

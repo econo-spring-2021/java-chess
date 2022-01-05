@@ -15,6 +15,8 @@ var main = {
                 _this.onCellClick(i);
             })
         }
+
+        _this.loadGameData();
     },
 
     startGame: function () {
@@ -81,13 +83,16 @@ var main = {
     },
 
     onCellClick: function (position) {
+        if (isGameProgress === false) {
+            return;
+        }
+
         if (clickedCellPosition === 0) {
             if ($('#cell'+position).css('backgroundImage') === 'none') {
                 return;
             }
 
             this.highlightCell(position);
-
             return;
         }
 
@@ -193,7 +198,7 @@ var main = {
             url: '/api/game/state',
 
         }).done(function (data) {
-            if (data === "ONGOING") {
+            if (data === "ONGOING" || data === "IDLE") {
                 return;
             }
 
@@ -212,6 +217,50 @@ var main = {
         }
 
         alert("백 승리");
+    },
+
+    loadGameData : function () {
+        $.ajax({
+            type: 'GET',
+            url: '/api/game/state',
+
+        }).done(function (data) {
+            if (data === "ONGOING") {
+                this.syncGameData();
+            }
+        }).fail(function (err) {
+            alert(JSON.stringify(err))
+        });
+    },
+
+    syncGameData : function () {
+        $.ajax({
+            type: 'GET',
+            url: '/api/game/data',
+
+        }).done(function (data) {
+            for (let i = 0; i < 64; i++) {
+                this.syncUnit(i+1, data[i]);
+            }
+
+        }).fail(function (err) {
+            alert(JSON.stringify(err))
+        });
+    },
+
+    syncUnit : function (position, delimiter) {
+        let unitFileName = "";
+        let unitCode = delimiter.charCodeAt(0);
+        if (unitCode >= 97) {
+            unitFileName += "w";
+        } else {
+            unitFileName += "b";
+            unitCode += 32;
+        }
+
+        unitFileName += String.fromCharCode(unitCode);
+
+        $('#cell' + position).css('backgroundImage', "url('/image/" + unitFileName +".png')");
     }
 }
 

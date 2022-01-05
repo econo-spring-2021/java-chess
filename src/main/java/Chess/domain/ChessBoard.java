@@ -151,4 +151,15 @@ public class ChessBoard {
 
         return UnitColor.WHITE;
     }
+
+    public String convertChessBoardToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Unit[] row : chessBoard) {
+            for (Unit unit : row) {
+                stringBuilder.append(unit.getTypeSymbol());
+            }
+        }
+
+        return stringBuilder.toString();
+    }
 }
