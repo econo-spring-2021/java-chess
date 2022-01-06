@@ -54,8 +54,6 @@ var main = {
                 destination: position
             }
 
-            console.log(movement);
-
             this.restoreHighlightCell();
 
             $.ajax({

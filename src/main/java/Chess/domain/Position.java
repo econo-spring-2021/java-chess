@@ -62,20 +62,22 @@ public class Position {
     }
 
     public void setNextRowToCheck(Position destination) {
-        if (row <= destination.getRow()) {
+        if (row <= destination.getRow() && row < ChessBoard.CHESSBOARD_ROW - 1) {
             row++;
-            return;
         }
 
-        row--;
+        if (row > destination.getRow() && row > 0) {
+            row--;
+        }
     }
 
     public void setNextColToCheck(Position destination) {
-        if (col <= destination.getCol()) {
+        if (col <= destination.getCol() && col < ChessBoard.CHESSBOARD_COLUMN - 1) {
             col++;
-            return;
         }
 
-        col--;
+        if (col > destination.getCol() && col > 0) {
+            col--;
+        }
     }
 }
