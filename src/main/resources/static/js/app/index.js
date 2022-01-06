@@ -235,6 +235,8 @@ function syncGameData() {
         url: '/api/game/data',
 
     }).done(function (data) {
+        isGameProgress = true;
+
         for (let i = 0; i < 64; i++) {
             syncUnit(i + 1, data[i]);
         }
@@ -245,6 +247,10 @@ function syncGameData() {
 }
 
 function syncUnit(position, delimiter) {
+    if (delimiter === ".") {
+        return;
+    }
+
     let unitFileName = "";
     let unitCode = delimiter.charCodeAt(0);
     if (unitCode >= 97) {
