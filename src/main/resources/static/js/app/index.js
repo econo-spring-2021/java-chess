@@ -159,9 +159,7 @@ function moveUnit(movement) {
         moveUnitImage(movement);
 
         getBlackScore();
-
         getWhiteScore();
-
         checkGameStatus();
 
     }).fail(function (err) {
@@ -236,6 +234,8 @@ function syncGameData() {
 
     }).done(function (data) {
         isGameProgress = true;
+        getBlackScore();
+        getWhiteScore();
 
         for (let i = 0; i < 64; i++) {
             syncUnit(i + 1, data[i]);
