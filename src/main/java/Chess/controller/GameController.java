@@ -35,7 +35,7 @@ public class GameController {
             Position destination = movementDto.getDestinationPosition();
 
             game.moveChessUnit(source, destination);
-            if (!game.getGameWinner().equals(null)) {
+            if (!game.checkIsKingAlive()) {
                 game.endGame();
             }
         } catch (Exception e) {
@@ -52,7 +52,7 @@ public class GameController {
     }
 
     public GameState executeStatusCommand() {
-        if (game.getIsStarted()) {
+        if (!game.getIsStarted()) {
             return GameState.IDLE;
         }
 

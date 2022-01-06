@@ -17,10 +17,22 @@ public class MovementDto {
     }
 
     public Position getSourcePosition() {
-        return new Position(source%ChessBoard.CHESSBOARD_COLUMN - 1, source/ChessBoard.CHESSBOARD_COLUMN);
+        int row = source / ChessBoard.CHESSBOARD_COLUMN;
+        int col = source % ChessBoard.CHESSBOARD_COLUMN - 1;
+        if (source % ChessBoard.CHESSBOARD_COLUMN == 0) {
+            row -= 1;
+            col = ChessBoard.CHESSBOARD_COLUMN - 1;
+        }
+        return new Position(row, col);
     }
 
     public Position getDestinationPosition() {
-        return new Position(destination%ChessBoard.CHESSBOARD_COLUMN - 1, destination/ChessBoard.CHESSBOARD_COLUMN);
+        int row = destination / ChessBoard.CHESSBOARD_COLUMN;
+        int col = destination % ChessBoard.CHESSBOARD_COLUMN - 1;
+        if (destination % ChessBoard.CHESSBOARD_COLUMN == 0) {
+            row -= 1;
+            col = ChessBoard.CHESSBOARD_COLUMN - 1;
+        }
+        return new Position(row, col);
     }
 }

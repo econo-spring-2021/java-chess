@@ -2,10 +2,7 @@ package Chess.controller;
 
 import Chess.domain.GameState;
 import Chess.dto.MovementDto;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GameApiController {
@@ -22,13 +19,13 @@ public class GameApiController {
     }
 
     @GetMapping("/api/unit/movable")
-    public boolean getIsMovableUnit(@RequestBody MovementDto movementDto) {
-        return gameController.getIsMovableUnit(movementDto);
+    public boolean getIsMovableUnit(@RequestParam(value = "source") int sourceCellIndex, @RequestParam(value = "destination") int destinationCellIndex) {
+        return gameController.getIsMovableUnit(new MovementDto(sourceCellIndex, destinationCellIndex));
     }
 
     @PostMapping("/api/unit/move")
-    public void moveUnit(@RequestBody MovementDto movementDto) {
-        gameController.executeMoveCommand(movementDto);
+    public void moveUnit(@RequestParam(value = "source") int sourceCellIndex, @RequestParam(value = "destination") int destinationCellIndex) {
+        gameController.executeMoveCommand(new MovementDto(sourceCellIndex, destinationCellIndex));
     }
 
     @GetMapping("/api/game/score/black")
