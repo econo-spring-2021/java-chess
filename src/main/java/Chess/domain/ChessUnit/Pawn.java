@@ -1,82 +1,111 @@
 package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
+import Chess.domain.Position;
+import Chess.exception.InvalidPositionException;
+import Chess.exception.InvalidPositionException;
 
-public class Pawn extends ChessUnit {
+public class Pawn extends Unit {
+    public static UnitType TYPE = UnitType.PAWN;
+
     private boolean isFirstMovement = true;
 
     public Pawn() {
-        super(ChessUnitType.PAWN);
+        super(TYPE);
     }
 
-    public Pawn(ChessUnitColor color) {
-        super(ChessUnitType.PAWN, color);
+    public Pawn(UnitColor color) {
+        super(TYPE, color);
     }
 
     @Override
-    public void move(int fromR, int fromC, int toR, int toC) {
+    public void move(Position source, Position destination) {
+        super.move(source, destination);
+
         if (isFirstMovement) {
             isFirstMovement = false;
         }
-
-        super.move(fromR, fromC, toR, toC);
     }
 
     @Override
-    public boolean isAbleToMove(int fromR, int fromC, int toR, int toC) {
-        if (isExistTeammateOnDestination(toR, toC)) {
-            return false;
+    public void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException {
+        if (isExistTeammateOnDestination(destination)) {
+            throw new InvalidPositionException(InvalidPositionException.TEAMMATE_ON_DESTINATION);
         }
 
-        if (!isRightDirectionMove(fromR, toR)) {
-            return false;
+        if (!isRightDirectionMove(source, destination)) {
+            throw new InvalidPositionException(InvalidPositionException.WRONG_DIRECTION_PATH);
         }
 
-        ChessUnit targetUnit = ChessBoard.getInstance().getUnitFromCell(toR, toC);
-        if (targetUnit.getType() != ChessUnitType.EMPTY && isAbleAttackMove(fromR, fromC, toR, toC)) {
-            return true;
+        Unit targetUnit = ChessBoard.getInstance().getUnitFromCell(destination);
+        if (isAbleAttackMove(source, destination) && targetUnit.getType() == UnitType.EMPTY) {
+            throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
         }
 
-        if (isFirstMovement && isAbleFirstMove(fromR, toR)) {
-            return true;
+        if (isFirstMove(source, destination)) {
+            if (!isFirstMovement) {
+                throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
+            }
+        } else {
+            if (!isAbleMovement(source, destination)) {
+                throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
+            }
         }
-
-        return isAbleMovement(fromR, toR);
     }
 
-    private boolean isAbleMovement(int fromR, int toR) {
-        if (Math.abs(fromR - toR) != 1) {
+    /**
+     * 폰의 기본 이동 규칙에 부합하는 이동인지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
+    private boolean isAbleMovement(Position source, Position destination) {
+        if (Math.abs(source.getRow() - destination.getRow()) != 1) {
             return false;
         }
 
         return true;
     }
 
-    private boolean isRightDirectionMove(int fromR, int toR) {
-        if (color == ChessUnitColor.WHITE && fromR - toR < 0) {
+    /**
+     * 폰의 팀에 따른 이동 방향이 올바른지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
+    private boolean isRightDirectionMove(Position source, Position destination) {
+        if (color == UnitColor.WHITE && source.getRow() - destination.getRow() < 0) {
             return false;
         }
 
-        if (color == ChessUnitColor.BLACK && fromR - toR > 0) {
+        if (color == UnitColor.BLACK && source.getRow() - destination.getRow() > 0) {
             return false;
         }
 
         return true;
     }
 
-    private boolean isAbleAttackMove(int fromR, int fromC, int toR, int toC) {
-        if (Math.abs(fromR - toR) == 1 && Math.abs(fromC - toC) == 1) {
+    /**
+     * 폰이 공격용 이동 규칙에 부합하는 이동인지 검사한다
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
+    private boolean isAbleAttackMove(Position source, Position destination) {
+        if (Math.abs(source.getRow() - destination.getRow()) == 1 && Math.abs(source.getCol() - destination.getCol()) == 1) {
             return true;
         }
 
         return false;
     }
 
-    private boolean isAbleFirstMove(int fromR, int toR) {
-        if (Math.abs(fromR - toR) > 2) {
-            return false;
+    /**
+     * 킹의 첫 이동 규칙에 부합하는 이동인지 검사한다.
+     * @param source 말이 있던 위치
+     * @param destination 말이 이동할 위치
+     */
+    private boolean isFirstMove(Position source, Position destination) {
+        if (Math.abs(source.getRow() - destination.getRow()) == 2) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

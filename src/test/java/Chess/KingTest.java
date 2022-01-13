@@ -1,10 +1,12 @@
 package Chess;
 
 import Chess.domain.ChessBoard;
-import Chess.domain.ChessUnit.ChessUnitColor;
+import Chess.domain.ChessUnit.UnitColor;
 import Chess.domain.ChessUnit.King;
 import Chess.domain.ChessUnit.Knight;
 import Chess.domain.ChessUnit.Pawn;
+import Chess.domain.Position;
+import Chess.exception.InvalidPositionException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,14 +24,14 @@ public class KingTest {
     @DisplayName("킹이 움직일 수 없는 움직임에 대해 올바르게 판단하는개")
     void test_king_isAbleToMove_impossibleMovement() {
         Knight king = new Knight();
-        Assertions.assertFalse(king.isAbleToMove(5, 5, 3, 3));
+        Assertions.assertThrows(InvalidPositionException.class, () -> king.move(new Position(5, 5), new Position(3, 3)));
     }
 
     @Test
     @DisplayName("킹이 움직일 수 있는 움직임에 대해 올바르게 판단하는개")
     void test_king_isAbleToMove_possibleMovement() {
         King king = new King();
-        Assertions.assertTrue(king.isAbleToMove(5, 5, 6, 6));
+        Assertions.assertDoesNotThrow(() -> king.move(new Position(5, 5), new Position(6, 6)));
     }
 
 
@@ -41,7 +43,7 @@ public class KingTest {
         Pawn pawn = new Pawn();
         chessBoard.setUnitFromCell(1, 1, pawn);
 
-        Assertions.assertFalse(king.isAbleToMove(0, 0, 1, 1));
+        Assertions.assertThrows(InvalidPositionException.class, () -> king.move(new Position(0, 0), new Position(1, 1)));
     }
 
     @Test
@@ -49,9 +51,9 @@ public class KingTest {
     void test_king_isAbleToMove_enemyOnDestination() {
         King king = new King();
         chessBoard.setUnitFromCell(0, 0, king);
-        Pawn pawn = new Pawn(ChessUnitColor.BLACK);
+        Pawn pawn = new Pawn(UnitColor.BLACK);
         chessBoard.setUnitFromCell(1, 1, pawn);
 
-        Assertions.assertTrue(king.isAbleToMove(0, 0, 1, 1));
+        Assertions.assertDoesNotThrow(() -> king.move(new Position(0, 0), new Position(1, 1)));
     }
 }

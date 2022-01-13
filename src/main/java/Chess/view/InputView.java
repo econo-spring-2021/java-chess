@@ -1,5 +1,7 @@
 package Chess.view;
 
+import Chess.exception.InvalidUserInputException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +12,7 @@ public class InputView {
     public static final String GAME_START_COMMAND = "start";
     public static final String GAME_END_COMMAND = "end";
     public static final String GAME_MOVE_COMMAND = "move";
+    public static final String GAME_STATUS_COMMAND = "status";
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -22,7 +25,7 @@ public class InputView {
             String input = scanner.nextLine().toLowerCase();
             List<String> commands = Arrays.asList(input.split(" "));
             String command = commands.get(0);
-            if (!command.equals(GAME_START_COMMAND) && !command.equals(GAME_END_COMMAND) && !command.equals(GAME_MOVE_COMMAND)) {
+            if (!command.equals(GAME_START_COMMAND) && !command.equals(GAME_END_COMMAND) && !command.equals(GAME_MOVE_COMMAND) && !command.equals(GAME_STATUS_COMMAND)) {
                 throw new InvalidUserInputException("올바르지 않은 명령어입니다.");
             }
 
@@ -43,6 +46,10 @@ public class InputView {
             throw new InvalidUserInputException("알맞은 갯수의 명령어를 입력하세요.");
         }
 
+        if (commands.get(1).length() > 2 || commands.get(2).length() > 2) {
+            throw new InvalidUserInputException("올바르지 않은 위치 값입니다.");
+        }
+
         if (commands.get(1).equals(2)) {
             throw new InvalidUserInputException("같은 위치로 움직일 수 없습니다.");
         }
@@ -57,13 +64,5 @@ public class InputView {
         if (specialCharactersMatcher.find()) {
             throw new InvalidUserInputException("위치 값에는 특수 문자가 들어갈 수 없습니다. (target 위치)");
         }
-    }
-
-    public static int convertLetterInputCharToInt(char input) {
-        return input - 'a';
-    }
-
-    public static int convertNumberInputCharToInt(char input) {
-        return input - '0';
     }
 }

@@ -1,29 +1,31 @@
 package Chess.domain.ChessUnit;
 
-public class King extends ChessUnit {
+import Chess.domain.Position;
+import Chess.exception.InvalidPositionException;
+
+public class King extends Unit {
+    public static UnitType TYPE = UnitType.KING;
     public King() {
-        super(ChessUnitType.KING);
+        super(TYPE);
     }
 
-    public King(ChessUnitColor color) {
-        super(ChessUnitType.KING, color);
+    public King(UnitColor color) {
+        super(TYPE, color);
     }
 
     @Override
-    public boolean isAbleToMove(int fromR, int fromC, int toR, int toC) {
-        if (isExistTeammateOnDestination(toR, toC)) {
-            return false;
+    public void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException {
+        if (isExistTeammateOnDestination(destination)) {
+            throw new InvalidPositionException(InvalidPositionException.TEAMMATE_ON_DESTINATION);
         }
 
-        if (!isAbleMovement(fromR, fromC, toR, toC)) {
-            return false;
+        if (!isAbleMovement(source, destination)) {
+            throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
         }
-
-        return true;
     }
 
-    private boolean isAbleMovement(int fromR, int fromC, int toR, int toC) {
-        if (Math.abs(fromR - toR) != 1 || Math.abs(fromC - toC) != 1) {
+    private boolean isAbleMovement(Position source, Position destination) {
+        if (Math.abs(source.getRow() - destination.getRow()) != 1 || Math.abs(source.getCol() - destination.getCol()) != 1) {
             return false;
         }
 

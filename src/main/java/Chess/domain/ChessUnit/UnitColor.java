@@ -1,6 +1,6 @@
 package Chess.domain.ChessUnit;
 
-public enum ChessUnitColor {
+public enum UnitColor {
     BLACK,
     WHITE
 }

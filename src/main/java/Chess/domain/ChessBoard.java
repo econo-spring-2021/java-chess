@@ -12,7 +12,7 @@ public class ChessBoard {
     public static final int WHITE_PAWN_CHESS_INIT_ROW = ChessBoard.CHESSBOARD_ROW - 2;
     public static final int BLACK_PAWN_CHESS_UNIT_ROW = 1;
     public static final int BLACK_SPECIAL_CHESS_UNIT_ROW = 0;
-    public static final List<Class<? extends ChessUnit>> INITIAL_SPECIAL_CHESS_UNIT_POSITION = Arrays.asList(
+    public static final List<Class<? extends Unit>> INITIAL_SPECIAL_CHESS_UNIT_POSITION = Arrays.asList(
             Rook.class,
             Knight.class,
             Bishop.class,
@@ -29,14 +29,10 @@ public class ChessBoard {
         return instance;
     }
 
-    private ChessUnit[][] chessBoard = new ChessUnit[CHESSBOARD_ROW][CHESSBOARD_COLUMN];
+    private Unit[][] chessBoard = new Unit[CHESSBOARD_ROW][CHESSBOARD_COLUMN];
 
     private ChessBoard() {
         initializeChessGame();
-    }
-
-    public static int convertInputRowToDataRow(int row) {
-        return CHESSBOARD_ROW - row;
     }
 
     public void initializeChessGame() {
@@ -58,10 +54,16 @@ public class ChessBoard {
 
     private void initializeChessUnit() throws Exception {
         for (int i = 0; i < CHESSBOARD_COLUMN; i++) {
-            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(ChessUnitColor.class).newInstance(ChessUnitColor.BLACK));
-            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new Pawn(ChessUnitColor.BLACK));
-            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION.get(i).getConstructor(ChessUnitColor.class).newInstance(ChessUnitColor.WHITE));
-            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new Pawn(ChessUnitColor.WHITE));
+            setUnitFromCell(BLACK_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION
+                                                                .get(i)
+                                                                .getConstructor(UnitColor.class)
+                                                                .newInstance(UnitColor.BLACK));
+            setUnitFromCell(BLACK_PAWN_CHESS_UNIT_ROW, i, new Pawn(UnitColor.BLACK));
+            setUnitFromCell(WHITE_SPECIAL_CHESS_UNIT_ROW, i, INITIAL_SPECIAL_CHESS_UNIT_POSITION
+                                                                .get(i)
+                                                                .getConstructor(UnitColor.class)
+                                                                .newInstance(UnitColor.WHITE));
+            setUnitFromCell(WHITE_PAWN_CHESS_INIT_ROW, i, new Pawn(UnitColor.WHITE));
         }
     }
 
@@ -73,21 +75,89 @@ public class ChessBoard {
         }
     }
 
-    public ChessUnit getUnitFromCell(int r, int c) throws IndexOutOfBoundsException {
+    public Unit getUnitFromCell(int r, int c) throws IndexOutOfBoundsException {
         return chessBoard[r][c];
     }
+    public Unit getUnitFromCell(Position position) throws IndexOutOfBoundsException {
+        return chessBoard[position.getRow()][position.getCol()];
+    }
 
-    public void setUnitFromCell(int r, int c, ChessUnit unit) throws IndexOutOfBoundsException {
+    public void setUnitFromCell(int r, int c, Unit unit) throws IndexOutOfBoundsException {
         chessBoard[r][c] = unit;
+    }
+
+    public void setUnitFromCell(Position position, Unit unit) throws IndexOutOfBoundsException {
+        chessBoard[position.getRow()][position.getCol()] = unit;
+    }
+
+    public Boolean isWhiteKingAlive() {
+        for (Unit[] row : chessBoard) {
+            for (Unit unit : row) {
+                if (unit.getType().equals(UnitType.KING) && unit.getColor().equals(UnitColor.WHITE)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isBlackKingAlive() {
+        for (Unit[] row : chessBoard) {
+            for (Unit unit : row) {
+                if (unit.getType().equals(UnitType.KING) && unit.getColor().equals(UnitColor.BLACK)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public float getScore(UnitColor targetColor) {
+        float score = 0f;
+        for (Unit[] row : chessBoard) {
+            float pawnScore = 0f;
+            for (Unit unit : row) {
+                if (!unit.getColor().equals(targetColor) || unit.getType().equals(UnitType.EMPTY)) {
+                    continue;
+                }
+
+                if (unit.getType().equals(UnitType.PAWN)) {
+                    pawnScore += unit.getType().getScore();
+                    continue;
+                }
+
+                score += unit.getType().getScore();
+            }
+
+            if (pawnScore > 1f) {
+                pawnScore /= 2;
+            }
+            score += pawnScore;
+        }
+
+        return score;
+    }
+
+    public UnitColor getWinner() {
+        if (!isBlackKingAlive() && !isWhiteKingAlive()) {
+            return null;
+        }
+
+        if (isWhiteKingAlive()) {
+            return UnitColor.BLACK;
+        }
+
+        return UnitColor.WHITE;
     }
 
     public String convertChessBoardToString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (ChessUnit[] row : chessBoard) {
-            for (ChessUnit unit : row) {
+        for (Unit[] row : chessBoard) {
+            for (Unit unit : row) {
                 stringBuilder.append(unit.getTypeSymbol());
             }
-            stringBuilder.append('\n');
         }
 
         return stringBuilder.toString();

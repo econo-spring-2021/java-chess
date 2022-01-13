@@ -1,12 +1,14 @@
 package Chess.domain.ChessUnit;
 
-public class EmptyCell extends ChessUnit {
+import Chess.domain.Position;
+
+public class EmptyCell extends Unit {
     public EmptyCell() {
-        super(ChessUnitType.EMPTY, ChessUnitColor.WHITE);
+        super(UnitType.EMPTY, UnitColor.WHITE);
     }
 
     @Override
-    public boolean isAbleToMove(int fromR, int fromC, int toR, int toC) {
-        return false;
+    public void validateIsAbleToMove(Position source, Position destination) {
+
     }
 }

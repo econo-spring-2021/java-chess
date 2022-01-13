@@ -1,48 +1,79 @@
 package Chess.domain;
 
-import Chess.domain.ChessUnit.ChessUnit;
-import Chess.domain.ChessUnit.EmptyCell;
+import Chess.domain.ChessUnit.Unit;
+import Chess.domain.ChessUnit.UnitColor;
+import Chess.domain.ChessUnit.UnitType;
+import Chess.exception.InvalidPositionException;
 import Chess.view.OutputView;
 
 public class Game {
     ChessBoard chessBoard = ChessBoard.getInstance();
     boolean isStarted = false;
+    boolean isPlaying = false;
 
-    public boolean isGameStarted() {
+    public boolean getIsStarted() {
         return isStarted;
+    }
+
+    public boolean getIsPlaying() {
+        return isPlaying;
     }
 
     public void initializeGame() {
         isStarted = true;
+        isPlaying = true;
         chessBoard.initializeChessGame();
     }
 
-    public void showChessBoard() {
-        String chessBoardStr = chessBoard.convertChessBoardToString();
-        OutputView.printString(chessBoardStr);
+    public void endGame() {
+        isPlaying = false;
     }
 
-    public void moveChessUnit(int fromR, int fromC, int toR, int toC) {
+    public UnitColor getGameWinner() {
+        return chessBoard.getWinner();
+    }
+
+    public boolean checkIsKingAlive() {
+        if (chessBoard.isWhiteKingAlive() && chessBoard.isBlackKingAlive()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public float getBlackScore() {
+        return chessBoard.getScore(UnitColor.BLACK);
+    }
+
+    public float getWhiteScore() {
+        return chessBoard.getScore(UnitColor.WHITE);
+    }
+
+    public boolean getIsMovableUnit(Position source, Position destination) {
+        Unit unit = chessBoard.getUnitFromCell(source);
         try {
-            if (!isGameStarted()) {
-                throw new IllegalArgumentException("게임 시작 전에 체스말을 움직일 수 없습니다");
-            }
+            unit.validateIsAbleToMove(source, destination);
 
-            fromR = ChessBoard.convertInputRowToDataRow(fromR);
-            toR = ChessBoard.convertInputRowToDataRow(toR);
+            return true;
+        } catch (InvalidPositionException e) {
+            return false;
+        }
+    }
 
-            ChessUnit unit = chessBoard.getUnitFromCell(fromR, fromC);
-            if (unit instanceof EmptyCell) {
+    public void moveChessUnit(Position source, Position destination) {
+        try {
+            Unit unit = chessBoard.getUnitFromCell(source);
+            if (unit.getType().equals(UnitType.EMPTY)) {
                 throw new IllegalArgumentException("그 곳에는 움직일 체스말이 없습니다.");
             }
 
-            if (!unit.isAbleToMove(fromR, fromC, toR, toC)) {
-                throw  new IllegalArgumentException("해당 체스말은 그렇게 움직일 수 없습니다.");
-            }
-
-            unit.move(fromR, fromC, toR, toC);
+            unit.move(source, destination);
         } catch (Exception e) {
             OutputView.printException(e);
         }
+    }
+
+    public String getChessboardData() {
+        return chessBoard.convertChessBoardToString();
     }
 }

@@ -1,51 +1,51 @@
 package Chess.domain.ChessUnit;
 
 import Chess.domain.ChessBoard;
+import Chess.domain.Position;
+import Chess.exception.InvalidPositionException;
 
-public class Bishop extends ChessUnit {
+public class Bishop extends Unit {
+    public static UnitType TYPE = UnitType.BISHOP;
     public Bishop() {
-        super(ChessUnitType.BISHOP);
+        super(TYPE);
     }
 
-    public Bishop(ChessUnitColor color) {
-        super(ChessUnitType.BISHOP, color);
+    public Bishop(UnitColor color) {
+        super(TYPE, color);
     }
 
     @Override
-    public boolean isAbleToMove(int fromR, int fromC, int toR, int toC) {
-        if (isExistTeammateOnDestination(toR, toC)) {
-            return false;
+    public void validateIsAbleToMove(Position source, Position destination) throws InvalidPositionException{
+        if (isExistTeammateOnDestination(destination)) {
+            throw new InvalidPositionException(InvalidPositionException.TEAMMATE_ON_DESTINATION);
         }
 
-        if (!isAbleMovement(fromR, fromC, toR, toC)) {
-            return false;
+        if (!isAbleMovement(source, destination)) {
+            throw new InvalidPositionException(InvalidPositionException.UNABLE_PATH);
         }
 
-        if (isExistObstacleOnMovement(fromR, fromC, toR, toC)) {
+        if (isExistObstacleOnDiagonalPath(source, destination)) {
+            throw new InvalidPositionException(InvalidPositionException.OBSTACLE_IN_PATH);
+        }
+    }
+
+    private boolean isAbleMovement(Position source, Position destination) {
+        if (Math.abs(source.getRow() - destination.getRow()) != Math.abs(source.getCol() - destination.getCol())) {
             return false;
         }
 
         return true;
     }
 
-    private boolean isAbleMovement(int fromR, int fromC, int toR, int toC) {
-        if (Math.abs(fromR - toR) != Math.abs(fromC - toC)) {
-            return false;
-        }
+    private boolean isExistObstacleOnDiagonalPath(Position source, Position destination) {
+        Position position = new Position(source);
+        position.setNextRowToCheck(destination);
+        position.setNextColToCheck(destination);
 
-        return true;
-    }
-
-    private boolean isExistObstacleOnMovement(int fromR, int fromC, int toR, int toC) {
-        int row = getNextPositionToCheck(fromR, toR);
-        int column = getNextPositionToCheck(fromC, toC);
-        while (row != toR && column != toC) {
-            if (!(ChessBoard.getInstance().getUnitFromCell(row, column) instanceof EmptyCell)) {
+        for (; position.getRow() != destination.getRow(); position.setNextRowToCheck(destination), position.setNextColToCheck(destination)) {
+            if (!(ChessBoard.getInstance().getUnitFromCell(position).getType().equals(UnitType.EMPTY))) {
                 return true;
             }
-
-            row = getNextPositionToCheck(row, toR);
-            column = getNextPositionToCheck(column, toC);
         }
 
         return false;
